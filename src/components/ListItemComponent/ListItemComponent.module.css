@@ -1,0 +1,61 @@
+.list-item {
+  position: relative;
+  display: grid;
+  grid-auto-flow: column;
+  width: 100%;
+  border-bottom: 1px solid var(--gray);
+}
+
+.item-img {
+  width: 5.688em;
+  height: 5.688em;
+}
+
+.item-img:hover {
+  cursor: pointer;
+}
+
+.text-h4 {
+  font-family: "Futura PT";
+  font-style: normal;
+  font-weight: 450;
+  font-size: 24px;
+  line-height: 31px;
+
+  letter-spacing: 0.05em;
+
+  color: #000000;
+}
+
+.text-span {
+  font-family: "Futura PT";
+  font-style: normal;
+  font-weight: 450;
+  font-size: 18px;
+  line-height: 150%;
+
+  text-align: right;
+  letter-spacing: 0.05em;
+
+  color: var(--gray);
+}
+
+span:hover {
+  cursor: pointer;
+}
+
+.list-item__left {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: left;
+  align-items: center;
+  gap: 16px;
+}
+
+.list-item__right {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: right;
+  align-items: center;
+  gap: 16px;
+}

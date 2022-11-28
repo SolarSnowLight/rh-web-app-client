@@ -1,0 +1,44 @@
+
+.reset {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+
+
+.noSelect {
+    user-select: none;
+}
+
+
+
+.track {
+    * { @extend .reset }
+    width: 100%;
+    height: 25px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+.gap {
+    flex: 1;
+}
+.trackSegment {
+    flex: 1; height: 100%;
+    display: grid;
+    place-items: center;
+    &:hover{
+        cursor: pointer;
+    }
+}
+.thumbBox {
+    height: 3px; width: 100%;
+}
+.thumb {
+    width: 100%; height: 100%;
+    background: #424041;
+    border-radius: 27px;
+    &[data-selected=true]{
+        background: #F8F8F8;
+    }
+}

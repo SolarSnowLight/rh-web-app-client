@@ -1,0 +1,109 @@
+
+@use 'src/styles/common';
+
+
+
+
+
+
+.page {
+    * { @extend .reset }
+    width: 100%;
+    background: #F8F8F8;
+    @extend .col;
+    align-items: center;
+}
+.pageElement {
+    width: clamp(400px, 100%, 1920px);
+    padding: 0 64px 0 64px;
+    @media (max-width: 900px) {
+        padding: 0 16px 0 16px;
+    }
+}
+
+
+.first {
+    @extend .pageElement;
+    @extend .rowWrap;
+    justify-content: space-between;
+    gap: 16px;
+
+    .mainTitle {
+        font: 500 36px var(--font-family-text);
+        color: black;
+        flex: 1;
+    }
+    .btnWrapper {
+        display: contents;
+        :global(.MuiButtonBase-root) {
+            width: 293px;
+            @include common.mobileFullWidth;
+        }
+    }
+}
+
+
+
+.imagePickerBox {
+    @extend .pageElement;
+    display: grid;
+    @media screen and (max-width: 550px) {
+        place-items: center;
+    }
+}
+
+
+
+.third {
+    @extend .pageElement;
+    @extend .row;
+    gap: 30px;
+    @media (max-width: 1000px) {
+        @include common.col;
+        align-items: center;
+    }
+
+    .inputBox {
+        @extend .col;
+        gap: 16px;
+        width: 400px;
+        @include common.mobileFullWidth;
+
+        :global(.MuiButtonBase-root),
+        :global(.MuiInputBase-root.MuiOutlinedInput-root) {
+            width: 100%;
+        }
+
+        .widgetBox {
+            @extend .col;
+            gap: 8px;
+
+            .title {
+                @extend .centerStart;
+                font: 500 18px var(--font-family-text);
+                color: #424041;
+                letter-spacing: 0.05em;
+                white-space: pre;
+            }
+        }
+    }
+    .projectsTableBox {
+        width: clamp(400px,100%,904px);
+        height: 514px;
+        overflow-y: auto;
+        @extend .col;
+        border: 1px solid #8B8B8B;
+        background: #FFFFFF;
+
+        .projectsTable {
+            @extend .col;
+            padding: 16px;
+            gap: 16px;
+        }
+    }
+}
+
+
+
+
+

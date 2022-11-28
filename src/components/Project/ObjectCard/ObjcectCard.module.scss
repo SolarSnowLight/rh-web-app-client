@@ -1,0 +1,137 @@
+
+@use 'src/styles/common';
+
+
+
+.frame {
+    * { @extend .reset }
+    width: 400px; height: max-content;
+    background: #F8F8F8;
+    border: 2px solid #424041;
+    display: grid;
+    padding-bottom: 8px;
+    grid: 'ui ui'
+          'image image' 240px
+          'name  name '
+          'year  count';
+
+    &:hover {
+        border: peru 2px solid !important;
+        cursor: pointer;
+    }
+
+    .ui {
+        grid-area: ui;
+        display: grid;
+        grid-auto-flow: column;
+        width: 100%;
+        height: min-content;
+        justify-content: end;
+    }
+
+    .imagesFrame {
+        grid-area: image;
+        width: 100%; height: fit-content;
+        display: flex;
+        overflow: auto;
+        @extend .hideScrollbar;
+
+        .contentContainer {
+            width: fit-content; height: fit-content;
+            display: flex;
+
+            .imageContainer {
+                width: 398px; height: 240px;
+                position: relative;
+
+                .imageBgc {
+                    @extend .abs;
+                    width: 100%; height: 100%;
+                    object-fit: cover;
+                    object-position: center;
+                }
+                .blur {
+                    @extend .abs;
+                    backdrop-filter: blur(20px);
+                    background: rgba(0,0,0,0.5);
+                }
+                .image {
+                    @extend .abs; top: unset;
+                    width: 100%; height: 100%;
+                    object-fit: contain;
+                    object-position: center;
+                }
+            }
+        }
+    }
+    .controlElementsContainer {
+        grid-area: image;
+        display: grid;
+        grid: 'left   .      right ' 1fr
+              'scroll scroll scroll'
+              / 20% 1fr 20% ;
+
+        .scroll {
+            grid-area: scroll;
+            place-self: end stretch;
+            padding-right: 40px;
+            padding-left: 40px;
+            z-index: 1;
+
+            /*[id$=thumb-box]{
+                padding: 2px 3px;
+            }
+            [id$=thumb]{
+                background: rgba(0,0,0,0.5);
+            }*/
+        }
+        /*.arrowLeftBox {
+            grid-area: left / left / scroll / left;
+            place-self: stretch;
+            background: #DEDEDE77;
+            z-index: 1;
+            @extend .center;
+            pointer-events: none;
+         }
+        .arrowBoxRight {
+            @extend .arrowLeftBox;
+            grid-area: right / right / scroll / right;
+        }*/
+    }
+
+
+
+    .logo {
+        grid-area: image;
+        place-self: start;
+        width: auto; height: 32px;
+        z-index: 2;
+    }
+    .name {
+        grid-area: name;
+        place-self: start;
+        margin-top: 8px; margin-left: 16px;
+        height: 31px;
+        font: 500 24px var(--font-family-text);
+        letter-spacing: 0.05em;
+        color: black;
+    }
+    .year {
+        grid-area: year;
+        place-self: start;
+        margin-top: 8px; margin-left: 16px;
+        height: 24px;
+        font: 400 16px var(--font-family-text);
+        letter-spacing: 0.055em;
+        color: #8B8B8B;
+    }
+    .count {
+        grid-area: count;
+        place-self: start end;
+        margin-top: 8px; margin-right: 16px;
+        height: 24px;
+        font: 400 16px var(--font-family-text);
+        letter-spacing: 0.055em;
+        color: #8B8B8B;
+    }
+}

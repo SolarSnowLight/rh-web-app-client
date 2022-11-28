@@ -1,0 +1,45 @@
+
+
+@use 'src/styles/common';
+
+
+
+.pageElement {
+    width: clamp(400px, 100%, 1920px);
+    padding: 0 64px 0 64px;
+}
+
+
+
+
+.companyInfoSlide {
+    * { @extend .reset }
+    @extend .pageElement;
+    background: #171717;
+    padding-top: 64px; padding-bottom: 64px;
+    min-height: 720px;
+    @extend .rowWrap;
+    gap: 64px;
+    place-items: start center;
+    place-content: center;
+
+    .item {
+        @extend .col;
+        width: 400px;
+        gap: 32px;
+        align-items: center;
+
+        .title {
+            font: 600 48px var(--font-family-text);
+            color: #F8F8F8;
+            @extend .centerText;
+        }
+        .text {
+            font: 500 18px var(--font-family-text);
+            color: #F8F8F8;
+            letter-spacing: 0.05em;
+        }
+    }
+}
+
+

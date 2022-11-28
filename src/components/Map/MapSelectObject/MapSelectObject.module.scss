@@ -1,0 +1,19 @@
+.map-wrapper {
+    width: 100%;
+    height: 100%;
+
+    img {
+        cursor: pointer;
+    }
+}
+
+.block-coord {
+    display: grid;
+    grid-auto-flow: column;
+}
+
+.block-btn {
+    display: grid;
+    grid-auto-flow: column;
+    margin-top: 16px;
+}

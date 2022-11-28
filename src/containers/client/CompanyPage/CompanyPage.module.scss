@@ -1,0 +1,82 @@
+
+@use 'src/styles/common';
+
+
+
+
+.page {
+    * { @extend .reset }
+    width: 100%;
+    background: #F8F8F8;
+    @extend .col;
+    align-items: center;
+}
+.pageElement {
+    width: clamp(400px, 100%, 1920px);
+    padding: 0 64px 0 64px;
+    @media screen and (max-width: 600px){
+        padding: 0 14px 0 14px;
+    }
+}
+
+
+
+
+
+
+.companyInfoFrame {
+    @extend .pageElement;
+    @extend .center;
+}
+
+
+
+.filterTitle {
+    @extend .pageElement;
+    background: #f8f8f8;
+
+    .title {
+        font: 500 18px var(--font-family-text);
+        color: #424041;
+        letter-spacing: 0.05em;
+        cursor: pointer;
+    }
+}
+
+
+.filterFrame {
+    @extend .pageElement;
+    background: #f8f8f8;
+    @extend .col;
+}
+
+
+
+
+
+.mapBox {
+    @extend .pageElement; height: 628px;
+    @extend .center;
+}
+
+.objectCardFrame {
+    @extend .pageElement;
+    margin-top: -62px; z-index: 2;
+    height: 365px;
+    position: relative;
+
+    .container {
+        @extend .abs;
+        display: grid;
+        height: fit-content;
+        overflow-x: scroll;
+        place-items: start;
+
+        .list {
+            @extend .row;
+            column-gap: 48px;
+            padding: 0 64px;
+        }
+    }
+
+}

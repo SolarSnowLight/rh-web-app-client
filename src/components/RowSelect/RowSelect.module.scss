@@ -1,0 +1,33 @@
+
+@use 'src/styles/common';
+
+
+
+
+
+.frame {
+    * { @extend .reset }
+    @extend .row;
+    column-gap: 8px;
+
+    .item {
+        min-width: 59px; height: 59px;
+        background: #F8F8F8;
+        border: 1px solid #424041;
+        padding: 16px;
+        cursor: pointer;
+        @extend .center;
+
+        &.selected {
+            background: #DEDEDE;
+        }
+
+        .text {
+            line-height: 150%;
+            font: 450 18px var(--font-family-text);
+            color: black;
+            letter-spacing: 0.05em;
+        }
+    }
+}
+

@@ -1,0 +1,66 @@
+/* Основной flex контайнер*/
+.flex-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 64px;
+    margin-right: 64px;
+    margin-top: 32px;
+    gap: 20px;
+
+    /* Выбираем вторую строку родительского контейнера и позиционируем его относительно самого себя*/
+    .flex-item:nth-child(2) {
+        gap: 0.5px;
+        align-self: stretch;
+    }
+
+    .flex-item:last-child {
+        align-items: flex-end;
+    }
+
+    /* Описание медиазапроса для мобильных устройств */
+    @media screen and (max-width: 768px) {
+        /* Центрирование всей колонки по центру*/
+        align-items: center;
+        gap: 40px;
+        margin-left: 0px;
+        margin-right: 0px;
+
+        .flex-item:last-child {
+            align-items: flex-end;
+            gap: 60px;
+        }
+
+        .flex-item:nth-child(2) {
+            gap: 40px;
+            align-self: center;
+        }
+    }
+}
+
+/* Дочерний элемент контейнера flex-container */
+.flex-item {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+
+    @media screen and (max-width: 768px) {
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+    }
+}
+
+/* Стиль для текста */
+.span-text {
+    font-family: "Futura PT";
+    font-style: normal;
+    font-weight: 450;
+    font-size: 36px;
+    line-height: 46px;
+    letter-spacing: 0.05em;
+    text-align: center;
+
+    color: var(--black);
+}

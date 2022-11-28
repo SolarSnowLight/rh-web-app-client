@@ -1,0 +1,122 @@
+.auth-block__main {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  align-content: center;
+}
+
+.auth-block__content {
+  display: inherit;
+  position: relative;
+  width: 90%;
+}
+
+.auth-block-text__header {
+  font-family: "Futura PT";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 62px;
+  color: #000000;
+}
+
+.auth-form-input__form {
+  margin-top: 2em;
+}
+
+.auth-form-btn__form {
+  margin-top: 3em;
+}
+
+.auth-form-recover__form {
+  display: grid;
+  justify-content: flex-end;
+}
+
+.auth-form-register__form {
+  margin-top: 2em;
+  display: grid;
+  justify-content: center;
+}
+
+.auth-form-recover-link__form {
+  font-family: "Futura PT";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+
+  letter-spacing: 0.055em;
+
+  color: var(--gray);
+  text-decoration: none;
+}
+
+.auth-form-text-gray__form {
+  font-family: "Futura PT";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+
+  letter-spacing: 0.055em;
+
+  color: var(--gray);
+  text-decoration: none;
+}
+
+.auth-form-text-black__form {
+  cursor: pointer;
+  font-family: "Futura PT";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+
+  letter-spacing: 0.055em;
+
+  color: var(--black);
+  text-decoration: none;
+}
+
+.auth-block-img__header {
+  display: grid;
+  justify-content: center;
+  margin-top: 2em;
+}
+
+.upload_image_wrapper {
+  cursor: pointer;
+  width: 9em;
+  height: 9em;
+  margin-top: 8px;
+  font-family: "Futura PT";
+  font-style: "normal";
+  font-weight: "450";
+  font-size: "18px";
+  line-height: "150%";
+  letter-spacing: "0.05em";
+  color: "#424041";
+  text-transform: "none";
+  border: 2px dashed #000000;
+  border-radius: 0px;
+  background-color: transparent;
+}
+
+.upload_image {
+  cursor: pointer;
+  width: 9em;
+  height: 9em;
+  margin-top: 8px;
+  object-fit: cover;
+  border-radius: 0px;
+  border: 2px solid #000000;
+}
+
+.auth-img-delete {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: center;
+}

@@ -1,0 +1,35 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "lib": [
+            "dom",
+            "dom.iterable",
+            "esnext"
+        ],
+
+        // allow resolve src folder as module
+        "baseUrl":".",
+
+        "allowJs": true,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "strict": true,
+        "exactOptionalPropertyTypes": true,
+        "forceConsistentCasingInFileNames": true,
+        "noFallthroughCasesInSwitch": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": true,
+        "jsx": "react-jsx",
+        "downlevelIteration": true,
+        "noImplicitAny": false,
+        "noImplicitOverride": true,
+        "allowUnreachableCode": true,
+    },
+    "include": [
+        "src"
+    ]
+}

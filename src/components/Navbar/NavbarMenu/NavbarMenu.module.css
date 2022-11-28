@@ -1,0 +1,85 @@
+.nav__header {
+    width: 100vw;
+    height: 80px;
+
+    box-sizing: border-box;
+    background: transparent;
+
+    position: relative;
+    border-bottom: 1px solid #000000;
+
+    backdrop-filter: blur(8px);
+}
+
+.nav-menu__header {
+    display: grid;
+    place-items: center;
+
+    grid-template-areas:
+    "A A B B   B B B B   C C C C"
+    "A A B B   B B B B   C C C C"
+    "A A B B   B B B B   C C C C";
+}
+
+.nav-block__header{
+    grid-area: C;
+
+    display: grid;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    place-items: center;
+    border-left: 1px solid #000000;
+}
+
+.nav-logo__header{
+    grid-area: A;
+
+    display: grid;
+    position: relative;
+    height: 100%;
+    place-items: center;
+}
+
+.text-menu--black {
+    font-family: var(--font-family-text);
+    font-style: normal;
+    font-weight: 450;
+    font-size: var(--font-size-text-header);
+    line-height: 31px;
+
+    letter-spacing: 0.05em;
+    color: #000000;
+}
+
+.text-menu--black:hover{
+    cursor: pointer;
+}
+
+.nav-menu-center__header{
+    grid-area: B;
+
+    display: grid;
+    position: relative;
+    width: 80%;
+    height: 100%;
+    grid-auto-flow: column;
+    place-items: center;
+}
+
+.nav-menu__element {
+    display: grid;
+    width: 7em;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-menu__element :global(a.active) {
+    display: grid;
+    background-color: #B4EFA6;
+    width: 7em;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}

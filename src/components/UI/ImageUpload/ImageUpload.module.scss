@@ -1,0 +1,42 @@
+.upload_image_wrapper {
+    cursor: pointer;
+    width: 18em;
+    height: 14.5em;
+    margin-top: 8px;
+    font-family: "Futura PT";
+    font-style: "normal";
+    font-weight: "450";
+    font-size: "18px";
+    line-height: "150%";
+    letter-spacing: "0.05em";
+    color: "#424041";
+    text-transform: "none";
+    border: 2px dashed #000000;
+    border-radius: 0px;
+    background-color: transparent;
+}
+
+.image-wrapper {
+    margin-top: 8px;
+    display: grid;
+    grid-auto-flow: column;
+    width: max-content;
+}
+
+.div-upload_image_wrapper {
+    display: grid;
+    grid-auto-flow: row;
+    gap: 40px;
+    width: 100%;
+    height: max-content;
+    grid-template-columns: repeat(auto-fit, 18em);
+}
+
+.upload_image {
+    cursor: pointer;
+    width: 18em;
+    height: 15em;
+    object-fit: cover;
+    border-radius: 0px;
+    border: 2px solid #000000;
+}

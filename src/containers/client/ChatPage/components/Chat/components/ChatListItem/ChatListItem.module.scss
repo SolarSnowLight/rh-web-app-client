@@ -1,0 +1,52 @@
+
+@use 'src/styles/common';
+
+
+
+.chatListItem {
+    * { @extend .reset }
+    width: 100%; height: fit-content;
+    display: grid;
+    grid: 'ava nick checkmark time' auto
+          'ava msg  .         .   ' 1fr
+         / auto 1fr auto auto;
+    border-bottom: 1px solid #424041;
+    cursor: pointer;
+}
+
+.ava {
+    grid-area: ava;
+    margin: 12px;
+    border-radius: 50%;
+    width: 50px; height: 50px;
+    object-position: center;
+    object-fit: cover;
+}
+.nick {
+    grid-area: nick;
+    padding: 11px 0 0 4px;
+    font: 500 18px var(--font-family-text);
+    color: black;
+    letter-spacing: 0.05em;
+    line-height: 150%;
+}
+.msg {
+    grid-area: msg;
+    padding: 1px 0 0 4px;
+    font: 400 16px var(--font-family-text);
+    color: #424041;
+    letter-spacing: 0.055em;
+    line-height: 150%;
+}
+.checkmarkBox {
+    grid-area: checkmark;
+    padding: 14px 0 0 0;
+}
+.time {
+    grid-area: time;
+    padding: 11px 0 0 3px;
+    font: 400 16px var(--font-family-text);
+    color: black;
+    letter-spacing: 0.055em;
+    line-height: 150%;
+}

@@ -1,0 +1,116 @@
+.admin-page__container {
+  display: grid;
+  grid-auto-flow: row;
+  width: 100%;
+  height: max-content;
+  justify-content: center;
+
+  /*background-color: yellow;*/
+}
+
+.admin-page__h2 {
+  font-family: "Futura PT";
+  font-style: normal;
+  font-weight: 450;
+  font-size: calc(var(--index) * 2.4);
+  line-height: 46px;
+  color: #000000;
+}
+
+.admin-page__h4 {
+  font-family: "Futura PT";
+  font-style: normal;
+  font-weight: 450;
+  font-size: calc(var(--index) * 1);
+  line-height: 31px;
+  letter-spacing: 0.05em;
+  color: #424041;
+}
+
+.admin-page__container--row {
+  margin-top: 2em;
+  display: grid;
+  grid-auto-flow: column;
+  gap: calc(var(--index) * 1);
+}
+
+.admin-page__container--column {
+  display: grid;
+  justify-content: start;
+  margin-top: 2em;
+}
+
+.btn-img-delete {
+  display: grid;
+  justify-content: center;
+}
+
+.upload_image_wrapper {
+  cursor: pointer;
+  width: 15em;
+  height: 15em;
+  margin-top: 8px;
+  font-family: "Futura PT";
+  font-style: "normal";
+  font-weight: "450";
+  font-size: "18px";
+  line-height: "150%";
+  letter-spacing: "0.05em";
+  color: "#424041";
+  text-transform: "none";
+  border: 2px dashed #000000;
+  border-radius: 0px;
+  background-color: transparent;
+}
+
+.upload_image {
+  cursor: pointer;
+  width: 15em;
+  height: 15em;
+  margin-top: 8px;
+  object-fit: cover;
+  border-radius: 0px;
+  border: 2px solid #000000;
+}
+
+.admin-page__container--row-btn {
+  display: grid;
+  grid-auto-flow: row;
+  justify-content: end;
+}
+
+@media screen and (max-width: 980px) {
+  .admin-page__container--row {
+    display: grid;
+    grid-auto-flow: row;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .admin-page__container {
+    display: grid;
+    grid-auto-flow: row;
+    width: 100%;
+    height: max-content;
+
+    /*background-color: purple;*/
+  }
+}
+
+@media screen and (min-width: 980px) and (max-width: 1480px) {
+  .admin-page__container--row {
+    display: grid;
+    grid-auto-flow: row;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .admin-page__container {
+    display: grid;
+    grid-auto-flow: row;
+    width: 100%;
+    height: max-content;
+
+    /*background-color: blue;*/
+  }
+}

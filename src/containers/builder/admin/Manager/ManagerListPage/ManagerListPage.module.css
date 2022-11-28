@@ -1,0 +1,57 @@
+.list {
+  margin-top: 2.406em;
+  margin-left: 64px;
+  margin-right: 64px;
+}
+
+.list-header {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 1fr 1fr;
+}
+
+.list-header__item {
+  display: grid;
+}
+
+.list-header__item__right {
+  display: grid;
+  justify-content: right;
+}
+
+.list-header__item__left {
+  display: grid;
+  justify-content: left;
+}
+
+.text-h3 {
+  font-family: "Futura PT";
+  font-style: normal;
+  font-weight: 450;
+  font-size: 36px;
+  line-height: 46px;
+
+  color: #000000;
+}
+
+.list-body {
+  margin-top: 2.406em;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-flow: row;
+  gap: 32px;
+}
+
+.list-footer {
+  margin-top: 1em;
+  display: grid;
+  justify-content: center;
+}
+
+@media screen and (max-width: 960px) {
+  .list-body {
+    grid-template-columns: none;
+    grid-auto-flow: row;
+  }
+}

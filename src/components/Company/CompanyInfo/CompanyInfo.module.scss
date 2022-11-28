@@ -1,0 +1,43 @@
+
+@use 'src/styles/common';
+
+
+.mainFrame {
+    * { @extend .reset }
+    @extend .rowWrap;
+    gap: 48px 64px;
+}
+
+.infoFrame {
+    @extend .col;
+    width: 555px;
+
+    .titleContainer {
+        @extend .row;
+        gap: 23px;
+
+        .logo {
+            height: 78px;
+            aspect-ratio: 1;
+        }
+        .title {
+            font: 900 48px var(--font-family-text);
+            color: black;
+        }
+    }
+
+    .infoItem {
+        font: 500 18px var(--font-family-text);
+        color: #8B8B8B;
+        letter-spacing: 0.05em;
+    }
+
+}
+.descriptionFrame {
+    min-width: 555px;
+    max-width: 709px;
+    font: 500 18px var(--font-family-text);
+    color: black;
+    letter-spacing: 0.05em;
+}
+

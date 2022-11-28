@@ -1,0 +1,162 @@
+:root {
+  /* Переменные величины адаптивности */
+  --index: calc(1vw + 1vh);
+  --side-small: 26;
+  --side-big: 36;
+
+  /* Цвета тем */
+  --theme-dark-bg: rgba(0, 0, 0, 0.25);
+  --theme-light-bg: var(--gray-background);
+
+  /* Размеры шрифта */
+  --font-size-text-header: 20px;
+
+  /* Шрифты */
+  --font-family-text: Futura PT;
+
+  /* Основные цвета */
+  --black: #111111;
+  --color-dark-purple: #424041;
+  --white: #ffffff;
+  --primaryPuple: #84009a;
+  --green: #00eba4;
+  --color-light-green: #DBFBF3;
+  --yellow: #fff500;
+  --red: #f3385a;
+
+  --gray-dark: #1b1b1b;
+  --gray: #8b8b8b;
+  --gray-light: #b7b7b7;
+  --gray-background: #f8f8f8;
+
+  /*Indents*/
+  --indent-xl: 56px;
+  --indent-l: 32px;
+  --indent-m: 24px;
+  --indent-s: 16px;
+  --indent-xs: 8px;
+
+  /*Size*/
+  --fontSize-xl: 40px;
+  --fontSize-l: 36px;
+  --fontSize-header: 24px;
+  --fontSize-body: 16px;
+  --fontSize-Subtext: 14px;
+
+  /*Radious*/
+  --borderRadius-block: 16px;
+  --borderRadius-button: 30px;
+
+  /*Shadow*/
+  --blockShadow: 0px 4px 9px rgba(65, 65, 65, 0.25);
+
+  /*Fonts*/
+  --font-family-label: Permanent Marker;
+  --font-family-body: Proxima-Regular;
+  --font-family-small: Proxima-Regular;
+  --font-family-active: Proxima-Bold;
+}
+
+/* Подключение шрифта Futura PT*/
+@font-face {
+  font-family: "Futura PT";
+  font-weight: 300;
+  src: local("Futura PT"),
+    url("src/resources/fonts/Futura PT/FuturaPT-Light.ttf");
+}
+@font-face {
+  font-family: "Futura PT";
+  font-weight: 400;
+  src: local("Futura PT"),
+    url("src/resources/fonts/Futura PT/FuturaPT-Book.ttf");
+}
+@font-face {
+  font-family: "Futura PT";
+  font-weight: 500;
+  src: local("Futura PT"),
+    url("src/resources/fonts/Futura PT/FuturaPT-Medium.ttf");
+}
+@font-face {
+  font-family: "Futura PT";
+  font-weight: 600;
+  src: local("Futura PT"),
+    url("src/resources/fonts/Futura PT/FuturaPT-Demi.ttf");
+}
+@font-face {
+  font-family: "Futura PT";
+  font-weight: 700;
+  src: local("Futura PT"),
+    url("src/resources/fonts/Futura PT/FuturaPT-Bold.ttf");
+}
+@font-face {
+  font-family: "Futura PT";
+  font-weight: 800;
+  src: local("Futura PT"),
+    url("src/resources/fonts/Futura PT/FuturaPT-ExtraBold.ttf");
+}
+@font-face {
+  font-family: "Futura PT";
+  font-weight: 900;
+  src: local("Futura PT"),
+    url("src/resources/fonts/Futura PT/FuturaPT-Heavy.ttf");
+}
+
+/* Общие стили*/
+.span__text__black-h4 {
+  font-family: "Futura PT";
+  font-style: normal;
+  font-weight: 450;
+  font-size: 24px;
+  line-height: 31px;
+
+  letter-spacing: 0.05em;
+
+  color: var(--black);
+
+  /* Автоперенос слов */
+  word-wrap: break-word;
+}
+
+.span__text__black-h3 {
+  font-family: "Futura PT";
+  font-style: normal;
+  font-weight: 450;
+  font-size: 36px;
+  line-height: 46px;
+  color: var(--black);
+
+  /* Автоперенос слов */
+  word-wrap: break-word;
+}
+
+.span__text__gray {
+  font-family: "Futura PT";
+  font-style: normal;
+  font-weight: 450;
+  font-size: 18px;
+  line-height: 150%;
+  letter-spacing: 0.05em;
+
+  color: var(--gray);
+
+  /* Автоперенос слов */
+  word-wrap: break-word;
+}
+
+.span__text__black {
+  font-family: "Futura PT";
+  font-style: normal;
+  font-weight: 450;
+  font-size: 18px;
+  line-height: 150%;
+  letter-spacing: 0.05em;
+  color: var(--black);
+
+  /* Автоперенос слов */
+  word-wrap: break-word;
+}
+
+
+a {
+  text-decoration: none;
+}

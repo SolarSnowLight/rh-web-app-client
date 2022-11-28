@@ -1,0 +1,53 @@
+@charset "UTF-8";
+/* Главный flex контейнер*/
+.flex-container {
+  position: relative;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  width: clamp(40em, 40%, 45em);
+  border: 1px solid var(--color-dark-purple);
+  border-radius: 1px;
+}
+.flex-container .flex-item:nth-child(n+1) {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-left: 0.5em;
+}
+
+.flex-container:hover {
+  background-color: var(--color-light-green);
+  cursor: pointer;
+}
+
+.flex-item {
+  align-self: center;
+}
+
+.text-h4 {
+  font-family: "Futura PT";
+  font-style: normal;
+  font-weight: 450;
+  font-size: 24px;
+  line-height: 31px;
+  letter-spacing: 0.05em;
+  color: #000000;
+}
+
+.text-span {
+  font-family: "Futura PT";
+  font-style: normal;
+  font-weight: 450;
+  font-size: 18px;
+  line-height: 150%;
+  text-align: right;
+  letter-spacing: 0.05em;
+  color: var(--gray);
+}
+
+span:hover {
+  cursor: pointer;
+}

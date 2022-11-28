@@ -1,0 +1,50 @@
+
+@use 'src/styles/common';
+
+
+
+.arcLabelText {
+    * { @extend .reset }
+    font: 400 16px var(--font-family-text);
+    letter-spacing: 0.055em;
+}
+
+
+
+.tooltipBox {
+    * { @extend .reset }
+    @extend .row;
+    padding: 12px;
+    background: #222222;
+    gap: 12px;
+
+    .indicator {
+        width: 20px; height: 20px;
+        border-radius: 50%;
+    }
+    .text {
+        font: 400 16px var(--font-family-text);
+        color: white;
+        letter-spacing: 0.055em;
+    }
+}
+
+
+
+.centeredMetricContainer {
+    * { @extend .reset }
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    width: fit-content;
+    @extend .col;
+    place-content: center;
+
+    .value {
+        font: 900 48px var(--font-family-text);
+    }
+    .text {
+        font: 400 16px var(--font-family-text);
+        margin-top: -9;
+    }
+}

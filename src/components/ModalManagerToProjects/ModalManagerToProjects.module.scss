@@ -1,0 +1,108 @@
+
+
+@use 'src/styles/common';
+
+
+//html, body {margin: 0; height: 100%; overflow: hidden}
+//html { overflow: hidden }
+
+// doesn't work
+/*:global(html:has(.fade)) {
+    overflow: hidden;
+}*/
+
+
+
+
+.noScroll {
+    overflow: hidden;
+}
+
+
+.fade {
+    * { @extend .reset }
+    position: fixed;
+    top: 0; right: 0; bottom: 0; left: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 100;
+    @extend .center;
+    overflow: auto;
+
+    .frame {
+        display: grid;
+        grid: '....  close' auto
+              'card  .....' auto
+             / auto  auto
+    }
+}
+
+.closeContainer {
+    width: 60px; height: 60px;
+    grid-area: close;
+    @extend .center;
+
+    .closeBox {
+        width: 40px; height: 40px;
+        @extend .center;
+        cursor: pointer;
+    }
+}
+
+.card {
+    grid-area: card;
+    @extend .rowWrap;
+    background: #F8F8F8;
+    padding: 32px;
+    gap: 52px;
+}
+
+.projectsListContainer {
+    min-width: calc(16px + 400px + 48px + 400px + 16px + 20px);
+    width: fit-content;
+    background: #FFFFFF;
+    border: 1px solid #8B8B8B;
+    height: 565px;
+    overflow-y: auto;
+
+    .content {
+        display: grid;
+        padding: 16px;
+        gap: 48px;
+        grid-template-columns: auto auto;
+    }
+}
+
+.buttons {
+    @extend .col;
+    gap: 25px;
+    width: 267px;
+
+    :global(.MuiButtonBase-root) {
+        width: 100% !important;
+    }
+}
+
+
+.selectableItem {
+    width: fit-content; height: fit-content;
+
+    .active {
+        width: fit-content; height: fit-content;
+        &[data-active=true]{
+            outline: 4px solid #B4EFA6;
+            outline-offset: 2px;
+        }
+    }
+    .selected {
+        width: fit-content; height: fit-content;
+        //outline: 2px solid #dcdcdc99;
+        outline-offset: 2px;
+        &:hover {
+            outline: 4px solid #909090;
+        }
+        &[data-selected=true] {
+            outline: 4px solid #555555;
+        }
+    }
+}
+

@@ -1,0 +1,101 @@
+
+@use 'src/styles/common';
+
+
+
+.frame {
+    * { @extend .reset }
+    @extend .col;
+    width: 400px; height: 365px;
+    background: #F8F8F8;
+    border: 1px solid #424041;
+
+    .imageFrame {
+        width: 100%; height: 240px;
+        position: relative;
+
+        .container {
+            width: 100%; height: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+
+            .list{
+                @extend .row;
+                width: fit-content;
+
+                .image{
+                    width: 398px; height: 240px;
+                    object-position: center;
+                    object-fit: cover;
+                }
+            }
+        }
+        .logo {
+            @extend .abs; right: unset; bottom: unset;
+            height: 32px;
+        }
+    }
+
+    .info {
+        display: grid;
+        padding: 8px 8px 0 8px;
+        grid:
+            'name year    ' auto
+            'dev  measures' auto
+            'addr measures' auto
+            / 1fr auto;
+        grid-gap: 8px;
+
+        .name {
+            grid-area: name;
+            @extend .centerStart;
+            height: 31px;
+            font: 500 24px var(--font-family-text);
+            letter-spacing: 0.05em;
+            color: black;
+        }
+
+        .dev {
+            grid-area: dev;
+            @extend .centerStart;
+            height: 27px;
+            font: 500 18px var(--font-family-text);
+            letter-spacing: 0.05em;
+            color: #424041;
+        }
+
+        .addr {
+            grid-area: addr;
+            @extend .centerStart;
+            height: 27px;
+            font: 500 18px var(--font-family-text);
+            letter-spacing: 0.05em;
+            color: #424041;
+        }
+
+        .year {
+            grid-area: year;
+            place-self: start end;
+            height: 24px;
+            font: 400 16px var(--font-family-text);
+            letter-spacing: 0.055em;
+            color: #8B8B8B;
+        }
+
+        .measures {
+            grid-area: measures;
+            place-self: end end;
+            font: 500 18px var(--font-family-text);
+            letter-spacing: 0.05em;
+            color: black;
+
+            big {
+                font-weight: 500;
+                font-size: 36px;
+                white-space: pre;
+            }
+        }
+    }
+}
+
+

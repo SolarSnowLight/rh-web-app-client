@@ -1,0 +1,68 @@
+.wrapper {
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 43.75em;
+    gap: 16px;
+
+    .flex-item:first-child {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 16px;
+    }
+
+    .flex-item:last-child {
+        display: flex;
+        justify-content: center;
+    }
+
+    @media screen and (max-width: 768px) {
+        justify-content: center;
+        width: 25em;
+    }
+}
+
+.flex-subitem {
+    display: flex;
+    flex-direction: column;
+
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.text-project-title {
+    font-family: "Futura PT";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 62px;
+
+    color: #000000;
+}
+
+.text-project-contact__header {
+    font-family: "Futura PT";
+    font-style: normal;
+    font-weight: 450;
+    font-size: 18px;
+    line-height: 150%;
+
+    letter-spacing: 0.05em;
+
+    color: #8b8b8b;
+}
+
+.logo {
+    width: 5.063em;
+    height: 5.063em;
+}
