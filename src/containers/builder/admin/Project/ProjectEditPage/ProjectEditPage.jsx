@@ -90,7 +90,7 @@ const ProjectEditPage = () => {
     const { state } = useLocation();
     const objectsContainerRef = useRef(null)
     const objectsContentRef = useRef(null)
-    const [scrollProps, onContainerScroll, setContainerScroll] = useScrollbar(objectsContainerRef, objectsContentRef)
+    const { scrollProps, onContainerScroll, setContainerScroll, canScroll } = useScrollbar(objectsContainerRef, objectsContentRef)
 
     useEffect(() => {
         dispatch(messageQueueAction.addMessage(null, "error", error));

@@ -100,9 +100,9 @@ const CreateProjectPage = () => {
     const dispatch = useAppDispatch();
     const { loading, request, error, clearError } = useHttp();
     const message = useMessageToastify();
-    const objectsContainerRef = useRef(null)
-    const objectsContentRef = useRef(null)
-    const [scrollProps, onContainerScroll, setContainerScroll] = useScrollbar(objectsContainerRef, objectsContentRef)
+    const objectsContainerRef = useRef(null);
+    const objectsContentRef = useRef(null);
+    const { scrollProps, onContainerScroll, setContainerScroll, canScroll } = useScrollbar(objectsContainerRef, objectsContentRef);
 
     // The data section presented on the page
     const [btnDisabled, setBtnDisabled] = useState(true);
@@ -381,7 +381,7 @@ const CreateProjectPage = () => {
                     </div>
                 </div>
             </form>
-            <Space h='4em'/>
+            <Space h='4em' />
         </>
     )
 }
