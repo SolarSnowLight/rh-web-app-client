@@ -11,11 +11,10 @@ import CompanyInfo from "src/components/Company/CompanyInfo/CompanyInfo";
 import TileSelect1, {DataElement} from "src/components/TileSelect1/TileSelect1";
 import {useTileSelect} from "src/components/TileSelect1/useTileSelect";
 import {LegendElement, ListItem2, Select1} from "./components";
+import {InitialPageProps, usePages} from "src/hooks/usePages/usePages";
 
 // test imports
 import {mockData} from "./mockData";
-import {usePages} from "../../../../hooks/usePages/usePages";
-
 
 
 
@@ -41,11 +40,23 @@ const BuilderAdminMainPage = () => {
     }
 
 
+    const [initialDevelopersPagesProps] = useState({ itemsSize: mockData.developers.length })
+    const [developersPages, developersActions] = usePages(initialDevelopersPagesProps)
+    const [developers, setDevelopers] = useState([] as typeof mockData.developers)
+    useEffect(()=>{
+        setDevelopers(developers.concat(mockData.developers.slice(
+            developersPages.current.firstItemIdx+developers.length,
+            developersPages.current.lastItemIdx+1
+        )))
+    },[developersPages])
+    const onShowMore = () => {
+        developersActions.showMore()
+    }
+
+
+
     const onCreateDeveloper = () => {
         toast.info('Создать застройщика')
-    }
-    const onShowMore = () => {
-        toast.info('Показать ещё')
     }
 
 
@@ -144,7 +155,7 @@ const BuilderAdminMainPage = () => {
 
         <div className={css.developersListContainer}>
             <div className={css.list}>
-                { mockData.developers.map(it=><ListItem key={it.id} client={it} />) }
+                { developers.map(it=><ListItem key={it.id} client={it} />) }
             </div>
             <Space h={48}/>
             <div className={css.center}>

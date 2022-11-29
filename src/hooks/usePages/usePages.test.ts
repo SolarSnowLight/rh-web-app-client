@@ -1,5 +1,5 @@
 import {InitialPageProps, usePages} from "./usePages"
-import {renderHook} from "@testing-library/react"
+import {act, renderHook} from "@testing-library/react"
 
 
 describe('usePages',()=>{
@@ -14,9 +14,9 @@ describe('usePages',()=>{
             //}
         }
         const view = renderHook(()=>usePages(initialPageProps))
-        let pages = view.result.current
+        let [page,actions] = view.result.current
         //console.log(JSON.stringify(pages, null, '    '))
-        expect(pages.props).toStrictEqual({
+        expect(page).toStrictEqual({
             maxPageSize: 10,
             itemsSize: 56,
             maxPageNumber: 6,
@@ -40,9 +40,9 @@ describe('usePages',()=>{
             //}
         }
         const view = renderHook(()=>usePages(initialPageProps))
-        let pages = view.result.current
+        let [page,actions] = view.result.current
         //console.log(JSON.stringify(pages, null, '    '))
-        expect(pages.props).toStrictEqual({
+        expect(page).toStrictEqual({
             maxPageSize: 10,
             itemsSize: 7,
             maxPageNumber: 1,
@@ -66,9 +66,9 @@ describe('usePages',()=>{
             //}
         }
         const view = renderHook(()=>usePages(initialPageProps))
-        let pages = view.result.current
+        let [page,actions] = view.result.current
         //console.log(JSON.stringify(pages, null, '    '))
-        expect(pages.props).toStrictEqual({
+        expect(page).toStrictEqual({
             maxPageSize: 10,
             itemsSize: 0,
             maxPageNumber: 1,
@@ -92,9 +92,9 @@ describe('usePages',()=>{
             }
         }
         const view = renderHook(()=>usePages(initialPageProps))
-        let pages = view.result.current
+        let [page,actions] = view.result.current
         //console.log(JSON.stringify(pages, null, '    '))
-        expect(pages.props).toStrictEqual({
+        expect(page).toStrictEqual({
             maxPageSize: 13,
             itemsSize: 67,
             maxPageNumber: 6,
@@ -107,6 +107,56 @@ describe('usePages',()=>{
             }
         })
     })
+
+    /*describe('maxPageSize: 13, itemsSize: 67, initialPage: { number: 2, numberEnd: 5 }',()=>{
+        let initialPageProps: InitialPageProps = {
+            maxPageSize: 13,
+            itemsSize: 67,
+            initialPage: {
+                number: 2,
+                numberEnd: 5,
+            }
+        }
+        const view = renderHook(()=>usePages(initialPageProps))
+        const result = view.result
+
+        test('check initial',()=>{
+            let [page,actions] = result.current
+            expect(page).toStrictEqual({
+                maxPageSize: 13,
+                itemsSize: 67,
+                maxPageNumber: 6,
+                current: {
+                    number: 2,
+                    numberEnd: 5,
+                    firstItemIdx: 13,
+                    lastItemIdx: 64,
+                    size: 52,
+                }
+            })
+        })
+
+        test('next()',()=>{
+            {
+                let [page,actions] = result.current
+                // todo act doesn't work
+                act(()=>actions.next())
+            }
+            let [page,actions] = result.current
+            expect(page).toStrictEqual({
+                maxPageSize: 13,
+                itemsSize: 67,
+                maxPageNumber: 6,
+                current: {
+                    number: 6,
+                    numberEnd: 6,
+                    firstItemIdx: 65,
+                    lastItemIdx: 67,
+                    size: 3,
+                }
+            })
+        })
+    })*/
 
 })
 

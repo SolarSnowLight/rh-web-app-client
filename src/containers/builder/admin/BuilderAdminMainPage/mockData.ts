@@ -114,12 +114,12 @@ const diagramFullData2: FullData = {
 
 
 
-const developers = Array(10).fill(undefined).map((_,i)=>({
+const developers = Array(67).fill(undefined).map((_,i)=>({
     id: i,
     ava: avaDefault,
-    fio: 'Иванов Иван Иванович',
-    projectsCnt: 2,
-    objectCnt: 12,
+    fio: `Иванов Иван Иванович ${i+1}`,
+    projectsCnt: i+2,
+    objectCnt: i+12,
 }))
 
 

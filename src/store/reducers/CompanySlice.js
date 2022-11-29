@@ -7,7 +7,7 @@ const initialState = {
     isLoading: false,
 };
 
-/* Create a new clice for company API */
+/* Create a new slice for company API */
 export const companySlice = createSlice({
     name: "company_slice",
     initialState,

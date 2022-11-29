@@ -76,6 +76,15 @@ const fitRange = (min: number, curr: number, max: number) =>
 const inRange = (min: number, curr: number, max: number) =>
   curr >= min && curr <= max;
 
+
+const nextLooped = (min: number, curr: number, max: number) =>
+    curr<=min ? min+1 : curr>=max ? min : curr+1
+
+
+const prevLooped = (min: number, curr: number, max: number) =>
+    curr<=min ? max : curr>=max ? max-1 : curr-1
+
+
 /**
  * Проверка является ли переданное значение массивом
  * @param obj any
@@ -107,6 +116,8 @@ export const utils = {
   mod,
   fitRange,
   inRange,
+  nextLooped,
+  prevLooped,
   isArray,
   toggleInSet,
 };
