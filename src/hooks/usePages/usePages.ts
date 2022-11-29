@@ -41,7 +41,9 @@ export type InitialPageProps = {
     itemsSize: number
     initialPage?: undefined | {
         number?: number | undefined
-        numberEnd?: number | undefined // todo allow use numberEnd or maxItemSize
+        numberEnd?: number | undefined
+        //firstItemIdx?: number | undefined
+        //lastItemIdx?: number | undefined
     }
 }
 export type PagesProps = {
@@ -58,11 +60,13 @@ export type PagesProps = {
     }
 }
 export type PagesActions = {
-    prev: ()=>void
-    next: ()=>void
-    to: (pageNumber: number)=>void
-    showMore: (pages?: number)=>void
-    showMoreItems: (items?: number)=>void
+    prev: ()=>void // jump to previous page
+    next: ()=>void // jump to next page
+    first: ()=>void // jump to first page
+    last: ()=>void // jump to last page
+    to: (pageNumber: number)=>void // jump to certain page by page number
+    showMore: (pages?: number)=>void // on this page show content of this page + next pages
+    //showMoreItems: (items?: number)=>void
 }
 
 
@@ -72,7 +76,7 @@ const getMaxPageSize = (maxPageSize?: number | undefined) =>
 const getItemsSize = (itemsSize: number) =>
     utils.fitRange(0, itemsSize, Number.MAX_SAFE_INTEGER)
 
-const getPageProps = (initialPageProps: InitialPageProps): PagesProps => {
+const computePageProps = (initialPageProps: InitialPageProps): PagesProps => {
     let maxPageSize = utils.fitRange(1, initialPageProps.maxPageSize ?? 10, Number.MAX_SAFE_INTEGER)
     let itemsSize = getItemsSize(initialPageProps.itemsSize)
     let maxPageNumber = Math.ceil(itemsSize/maxPageSize)
@@ -98,9 +102,9 @@ const getPageProps = (initialPageProps: InitialPageProps): PagesProps => {
 }
 
 
-export const usePages = (initialPageProps: InitialPageProps) => {
+export const usePages = (initialPageProps: InitialPageProps): readonly [PagesProps, PagesActions] => {
 
-    const [pageProps, setPageProps] = useState(()=>getPageProps(initialPageProps))
+    const [pageProps, setPageProps] = useState(()=>computePageProps(initialPageProps))
     useLayoutEffect(()=>{
         setPageProps({
             ...pageProps,
@@ -111,24 +115,34 @@ export const usePages = (initialPageProps: InitialPageProps) => {
 
 
 
-    const prev = () => {/*todo*/} // jump to previous page
-    const next = () => {/*todo*/} // jump to next page
-    const to = (pageNumber: number) => {/*todo*/} // jump to certain page by page number
-    const showMore = () => {/*todo*/} // on this page show content of this page + next pages
-    const totalItems = 0 /*todo*/ // total items
-    const total = 0 /*todo*/ // total pages
-    const current = 0 /*todo*/ // current page number
-    const currentEnd = 0 /*todo*/ // current page end number inclusive if several pages display in one piece
-    const maxSize = 0 /*todo*/ // one page max items count
-    const defaultMaxSize = 0 /*todo*/ // default one page max items size
-    const size = 0 /*todo*/ // current page items count
-    const firstIdx = 0 /*todo*/ // current page first item index
-    const lastIdx = 0 /*todo*/ // current page last item index
-
-    return {
-        props: pageProps,
-        actions: {
-
-        }
+    const prev = () => {
+        to(utils.prevLooped(1, pageProps.current.number, pageProps.maxPageSize))
     }
+    const next = () => {
+        to(utils.nextLooped(1, pageProps.current.numberEnd, pageProps.maxPageSize))
+    }
+    const first = () => {
+        to(1)
+    }
+    const last = () => {
+        to(pageProps.maxPageNumber)
+    }
+    const to = (pageNumber: number|undefined = undefined, pageNumberEnd: number|undefined = undefined) => {
+        setPageProps(computePageProps({
+            ...pageProps,
+            initialPage: {
+                number: pageNumber,
+                numberEnd: pageNumberEnd,
+            }
+        }))
+    }
+    const showMore = (pages: number = 1) => {
+        to(pageProps.current.number, pageProps.current.numberEnd+pages)
+    }
+
+
+    return [
+        pageProps,
+        { prev, next, first, last, to, showMore }
+    ] as const
 }
