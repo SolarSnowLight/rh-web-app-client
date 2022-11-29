@@ -1,0 +1,45 @@
+
+@use 'src/styles/common';
+
+
+.container {
+    * { @extend .reset }
+    width: fit-content;
+    max-width: 710px;
+    @extend .col;
+
+    .nameLogoContainer {
+        width: fit-content;
+        display: grid;
+        grid: 'logo name'
+              'logo builder';
+        column-gap: 10px;
+        @media (max-width: 550px) {
+            grid: 'logo' '.' 8px 'name' '.' 16px 'builder';
+        }
+
+        .logo {
+            grid-area: logo;
+            width: auto; height: 78px;
+            @media (max-width: 550px){
+                height: 66px;
+            }
+        }
+        .name {
+            grid-area: name;
+            font: 500 36px var(--font-family-text);
+            color: black;
+        }
+        .builderName {
+            grid-area: builder;
+            font: 400 16px var(--font-family-text);
+            color: #8B8B8B;
+            letter-spacing: 0.055em;
+        }
+    }
+    .projectDescription {
+        font: 500 18px var(--font-family-text);
+        color: black;
+        letter-spacing: 0.05em;
+    }
+}

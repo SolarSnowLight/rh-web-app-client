@@ -55,7 +55,6 @@ const BuilderAdminMainPage = () => {
         <Space h={32.5}/>
 
         <div className={css.companyInfoFrame}>
-            { /* Информация о компании + кнопка чата */}
             <CompanyInfo companyInfo={mockData.companyInfo} viewMode='edit'/>
         </div>
 

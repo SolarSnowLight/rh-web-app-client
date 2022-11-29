@@ -14,7 +14,7 @@ import ButtonGreenComponent from 'src/components/UI/Button/ButtonGreenComponent'
 import ButtonWhiteComponent from 'src/components/UI/Button/ButtonWhiteComponent';
 import ImageUpload from 'src/components/UI/ImageUpload';
 import TextFieldControl from 'src/components/UI/TextField/TextFieldControl';
-import ObjectCard from '../../../../../components/ObjectCard2/ObjectCard2';
+import ObjectCard from '../../../../../components/ObjectCard/ObjectCard';
 import AutocompleteControl from 'src/components/UI/Autocomplete/AutocompleteControl';
 import HorizontalScrollbar from 'src/components/HorizontalScrollbar/HorizontalScrollbar';
 import Space from 'src/components/Space';

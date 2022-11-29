@@ -16,7 +16,7 @@ type CompanyInfoProps = {
         phone: string
         description: string
     },
-    viewMode?: 'view'|'edit',
+    viewMode?: 'view'|'chat'|'edit',
 }
 
 
@@ -43,7 +43,7 @@ const CompanyInfo = ({ companyInfo, viewMode = 'view' }: CompanyInfoProps) => {
             </div>
 
             <div className={css.buttonWrapper}>
-                { viewMode==='view' && <ButtonWhite2 onClick={onChat}>
+                { viewMode==='chat' && <ButtonWhite2 onClick={onChat}>
                     Чат онлайн
                 </ButtonWhite2> }
                 { viewMode==='edit' && <ButtonWhite2FullWidth onClick={onEdit}>

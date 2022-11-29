@@ -8,85 +8,15 @@ import styled from "styled-components";
 import { Arrow1DownIc } from 'src/components/icons';
 import {SearchIc} from "src/components/icons";
 import MapComponent from 'src/components/Map/MapComponent';
-import ObjectCard from "src/components/ObjectCard/ObjectCard";
+import {mockData} from "./mockData";
+import ProjectCardList from "src/components/ProjectCardList/ProjectCardList";
+import {useMedia} from "src/hooks/useMedia";
 
-
-import logoDefault from 'src/resources/images/logo-default.png'
-import buildingExample1 from 'src/resources/images/examples/building-example-1.webp'
-import buildingExample2 from 'src/resources/images/examples/building-example-2.webp'
-import buildingExample3 from 'src/resources/images/examples/building-example-3.jpg'
-
-
-const allRooms = ['1','2','3','4+']
-const allSorts = ['Стоимость', 'Дата']
-const allCostsFrom = [{ name: 'от 2млн', value: 2000000 }, { name: 'от 4млн', value: 4000000 }]
-const allCostsTo = [{ name: 'до 10млн', value: 10000000 }, { name: 'до 100млн', value: 100000000 }]
-const searchVariants = [{value: 'Иркутск'}, {value: 'Анграск'}]
-
-
-
-const buildings = [
-    {
-        id: 1,
-        developerCompanyLogo: logoDefault,
-        images: [buildingExample1,buildingExample2,buildingExample3],
-        projectName: 'Проект 1',
-        year: 2025,
-        developer: 'Застройщик 1',
-        address: 'ул. Мира 15, 76',
-        square: 50,
-        price: 10,
-    },
-    {
-        id: 2,
-        developerCompanyLogo: logoDefault,
-        projectName: 'Название проекта',
-        year: 2023,
-        developer: 'Застройщик',
-        address: 'ул. Мира 15, 76',
-        square: 42,
-        price: 5,
-    },
-    {
-        id: 3,
-        projectName: 'Название проекта',
-        year: 2023,
-        developer: 'Застройщик',
-        address: 'ул. Мира 15, 76',
-        square: 42,
-        price: 5,
-    },
-    {
-        id: 4,
-        projectName: 'Название проекта',
-        year: 2023,
-        developer: 'Застройщик',
-        address: 'ул. Мира 15, 76',
-        square: 42,
-        price: 5,
-    },
-    {
-        id: 5,
-        projectName: 'Название проекта',
-        year: 2023,
-        developer: 'Застройщик',
-        address: 'ул. Мира 15, 76',
-        square: 42,
-        price: 5,
-    },
-    {
-        id: 6,
-        projectName: 'Название проекта',
-        year: 2023,
-        developer: 'Застройщик',
-        address: 'ул. Мира 15, 76',
-        square: 42,
-        price: 5,
-    },
-]
 
 
 const ObjectsSearchPage = () => {
+
+    const lowWidth = useMedia('(max-width: 900px)')
 
     const [selectedRooms, setSelectedRooms] = useState(['1'])
     const onRoomSelect = (item, isSelected, index) => {
@@ -99,12 +29,12 @@ const ObjectsSearchPage = () => {
         setSort(ev.target.value)
     }
 
-    const [costFrom, setCostFrom] = useState(allCostsFrom.find(it=>it.value===2000000)!)
+    const [costFrom, setCostFrom] = useState(mockData.allCostsFrom.find(it=>it.value===2000000)!)
     const onCostFrom = (ev) => {
         setCostFrom(ev.target.value)
     }
 
-    const [costTo, setCostTo] = useState(allCostsTo.find(it=>it.value===100000000)!)
+    const [costTo, setCostTo] = useState(mockData.allCostsTo.find(it=>it.value===100000000)!)
     const onCostTo = (ev) => {
         setCostTo(ev.target.value)
     }
@@ -129,7 +59,7 @@ const ObjectsSearchPage = () => {
                 <Autocomplete
                     freeSolo
                     disableClearable
-                    options={searchVariants.map(it=>it.value)}
+                    options={mockData.searchVariants.map(it=>it.value)}
                     renderInput={(params)=><SearchInput1
                         {...params}
                         // @ts-ignore
@@ -144,7 +74,7 @@ const ObjectsSearchPage = () => {
             <div className={css.widgetBox}>
                 <div className={css.title}>Количество комнат</div>
                 <Space h={8}/>
-                <RowSelect items={allRooms} selected={selectedRooms} onSelect={onRoomSelect}/>
+                <RowSelect items={mockData.allRooms} selected={selectedRooms} onSelect={onRoomSelect}/>
             </div>
 
             <div className={css.widgetBox}>
@@ -159,7 +89,7 @@ const ObjectsSearchPage = () => {
                         {
                             // в доках написано, что объект можно кидать в качестве value https://mui.com/material-ui/api/select/
                             // @ts-ignore
-                            allCostsFrom.map(it=><MenuItem key={it.value} value={it}>{it.name}</MenuItem>)
+                            mockData.allCostsFrom.map(it=><MenuItem key={it.value} value={it}>{it.name}</MenuItem>)
                         }
                     </Select1>
                     <Select1
@@ -170,7 +100,7 @@ const ObjectsSearchPage = () => {
                         {
                             // в доках написано, что объект можно кидать в качестве value https://mui.com/material-ui/api/select/
                             // @ts-ignore
-                            allCostsTo.map(it=><MenuItem key={it.value} value={it}>{it.name}</MenuItem>)
+                            mockData.allCostsTo.map(it=><MenuItem key={it.value} value={it}>{it.name}</MenuItem>)
                         }
                     </Select1>
                 </div>
@@ -191,7 +121,7 @@ const ObjectsSearchPage = () => {
                     }}
                 >
                     <MenuItem value=""><em>По умолчанию</em></MenuItem>
-                    { allSorts.map(it=><MenuItem key={it} value={it}>{it}</MenuItem>) }
+                    { mockData.allSorts.map(it=><MenuItem key={it} value={it}>{it}</MenuItem>) }
                 </Select1>
             </div>
 
@@ -210,13 +140,9 @@ const ObjectsSearchPage = () => {
             <MapComponent style={{ width: '100%', height: '100%' }}/>
         </div>
 
-        <div className={css.objectCardFrame}>
-            <div className={css.container}>
-                <div className={css.list}>
-                    { buildings.map(it=><ObjectCard key={it.id} building={it} />) }
-                </div>
-            </div>
-        </div>
+        <Space h={!lowWidth ? 24 : 16} />
+
+        <ProjectCardList projects={mockData.projects}/>
 
         <Space h={85}/>
 

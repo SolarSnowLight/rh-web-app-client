@@ -5,7 +5,7 @@ import styled from "styled-components";
 import {utils} from "src/utils/utils";
 import classNames from "classnames";
 import {useDisableHtmlScroll} from "src/hooks/useDisableHtmlScroll/useDisableHtmlScroll";
-import ObjectCard2 from "src/components/ObjectCard2/ObjectCard2";
+import ObjectCard2 from "src/components/ObjectCard/ObjectCard";
 import ButtonGreen2 from "src/components/UI-Styled/Button/ButtonGreen2/ButtonGreen2";
 import ButtonGray2 from "src/components/UI-Styled/Button/ButtonGray2/ButtonGray2";
 import {toast} from "react-toastify";

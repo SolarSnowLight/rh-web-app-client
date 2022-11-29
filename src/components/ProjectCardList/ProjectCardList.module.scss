@@ -1,0 +1,54 @@
+
+@use 'src/styles/common';
+
+
+
+
+
+
+.pageElement {
+    width: clamp(400px, 100%, 1920px);
+    padding: 0 64px 0 64px;
+    @media screen and (max-width: 900px) {
+        padding: 0 16px 0 16px;
+    }
+}
+
+
+
+
+.objectsListSlide {
+    @extend .pageElement;
+    padding: 0;
+    display: flex;
+    overflow: auto;
+    z-index: 2;
+    @extend .hideScrollbar;
+
+    .contentContainer {
+        @extend .row;
+        gap: 48px;
+        padding: 0 64px;
+
+        @media (max-width: 900px) {
+            gap: 8px;
+            padding: 0 16px;
+        }
+    }
+}
+
+.scrollbarContainer {
+    @extend .pageElement;
+
+    .scroll {
+        background: rgba(0, 0, 0, 0.2);
+        height: 10px;
+
+        [id$=thumb-box]{
+            padding: 2px 3px;
+        }
+        [id$=thumb]{
+            background: rgba(0,0,0,0.5);
+        }
+    }
+}
