@@ -12,6 +12,7 @@ import companyAction from 'src/store/actions/CompanyAction';
 import { useEffect } from "react";
 import MainApi from 'src/constants/addresses/apis/main.api';
 import BuilderAdminRoute from 'src/constants/addresses/routes/builder.admin.route';
+import Space from "src/components/Space/Space";
 
 const ManagerListPage = () => {
     const userSelector = useAppSelector((state) => state.userReducer);
@@ -44,35 +45,38 @@ const ManagerListPage = () => {
     }
 
     return (
-        <div className={styles["flex-container"]}>
-            <div className={styles["flex-item"]}>
-                <span className={styles["text-h3"]}>Менеджеры</span>
-                <ButtonWhiteComponent
-                    title={"Добавить менеджера"}
-                />
+        <>
+            <div className={styles["flex-container"]}>
+                <div className={styles["flex-item"]}>
+                    <span className={styles["text-h3"]}>Менеджеры</span>
+                    <ButtonWhiteComponent
+                        title={"Добавить менеджера"}
+                    />
+                </div>
+                <div className={styles["flex-item"]}>
+                    {
+                        companySelector.managers && companySelector.managers?.length > 0 && companySelector.managers.map((item) => {
+                            if (!item) {
+                                return (<></>);
+                            }
+                            return (
+                                <ListItemComponent
+                                    column1={item.data.name}
+                                    img={(item.data.avatar) ? MainApi.main_server + '/' + item.data.avatar.replace('\\', '/') : null}
+                                    clickHandler={() => {
+                                        navigateToManager(item);
+                                    }}
+                                />
+                            )
+                        })
+                    }
+                </div>
+                <div className={styles["flex-item"]}>
+                    <span className={"span__text__black-h4"}>Показать ещё</span>
+                </div>
             </div>
-            <div className={styles["flex-item"]}>
-                {
-                    companySelector.managers && companySelector.managers?.length > 0 && companySelector.managers.map((item) => {
-                        if (!item) {
-                            return (<></>);
-                        }
-                        return (
-                            <ListItemComponent
-                                column1={item.data.name}
-                                img={(item.data.avatar) ? MainApi.main_server + '/' + item.data.avatar.replace('\\', '/') : null}
-                                clickHandler={() => {
-                                    navigateToManager(item);
-                                }}
-                            />
-                        )
-                    })
-                }
-            </div>
-            <div className={styles["flex-item"]}>
-                <span className={"span__text__black-h4"}>Показать ещё</span>
-            </div>
-        </div>
+            <Space h='4em'/>
+        </>
     )
 }
 

@@ -141,6 +141,8 @@ const CompanyPage = () => {
             </div>
         </div>
 
+        <Space h='4em'/>
+
     </div>
 }
 

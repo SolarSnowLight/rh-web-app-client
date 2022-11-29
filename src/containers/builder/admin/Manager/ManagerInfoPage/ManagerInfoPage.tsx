@@ -212,6 +212,7 @@ const ManagerInfoPage = () => {
 
             </form>
 
+            <Space h='4em'/>
 
         </div>
     </>

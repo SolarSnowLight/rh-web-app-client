@@ -6,6 +6,7 @@ import ObjectsSlide from "./components/ObjectsSlide";
 import MapSlide from "./components/MapSlide";
 import DevelopersSlide from "./components/DevelopersSlide";
 import TitleSlide from "./components/TitleSlide";
+import Space from "src/components/Space";
 
 
 
@@ -30,6 +31,8 @@ const HomePage = () => {
         <MapSlide />
 
         <DevelopersSlide />
+
+        <Space h='4em'/>
 
     </div>
 }

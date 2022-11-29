@@ -11,7 +11,7 @@ import GalleryHorizontalScrollbar from "src/components/GalleryHorizontalScrollba
 import Arrow1DownIc from "src/components/icons/Arrow1DownIc";
 
 /* Хуки */
-import { useGalleryScrollbar } from "src/hooks/useScrollbar/useGalleryScrollbar";
+import { useGalleryScrollbar } from "src/components/GalleryHorizontalScrollbar/useGalleryScrollbar";
 
 /* Ресурсы */
 import buildingDefault from "src/resources/images/building-default.png";
@@ -49,12 +49,13 @@ const ObjectCard = (props: IObjectCardProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  const [
-    scrollProps,
-    onContainerScroll,
-    setContainerScroll,
-    scrollToElementByIndex,
-  ] = useGalleryScrollbar(containerRef, contentRef, elementCount);
+  const {
+	  galleryScrollProps: scrollProps,
+	  onContainerScroll,
+	  setContainerScroll,
+	  scrollToElementByIndex,
+	  canScroll,
+  } = useGalleryScrollbar(containerRef, contentRef, elementCount);
 
   return (
 		<div
@@ -101,7 +102,7 @@ const ObjectCard = (props: IObjectCardProps) => {
       </div>
 
       <div className={css.controlElementsContainer}>
-    		{elementCount >= 2 && (
+    		{ canScroll && (
     			<GalleryHorizontalScrollbar
         			className={css.scroll}
             		scrollProps={scrollProps}

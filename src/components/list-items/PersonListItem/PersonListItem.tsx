@@ -18,32 +18,42 @@ const PersonListItem = React.forwardRef<HTMLDivElement, PersonListItemProps>((
 ) => {
     return <Container ref={forwardedRef as any} {...props}>
         <Image src={client.ava}/>
-        <Fio>{client.fio}</Fio>
-        <Info>{client.projectsCnt} проекта, {client.objectCnt} объектов</Info>
+        <TextDataWrapper>
+            <Fio>{client.fio}</Fio>
+            <Info>{client.projectsCnt} проекта, {client.objectCnt} объектов</Info>
+        </TextDataWrapper>
     </Container>
 })
 export default React.memo(PersonListItem) as unknown as typeof PersonListItem
 
 
 let Container = styled.div`
-  width: 100%; height: 91px;
+  width: 100%; height: 105px;
   ${commonStyled.row};
-  column-gap: 16px;
+  align-items: center;
+  padding-left: 8px;
+  gap: 16px;
   border-bottom: 1px solid #424041;
 `
 Container = React.memo(Container) as unknown as typeof Container
 
-let Image = styled.div<{ src?: string|undefined }>`
-  height: 100%; aspect-ratio: 1;
-  background-image: url(${p=>p.src});
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+let Image = styled.img`
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  object-position: center;
+  object-fit: cover;
 `
 Image = React.memo(Image) as unknown as typeof Image
 
+let TextDataWrapper = styled.div`
+  display: contents;
+  @media (max-width: 550px) {
+    ${commonStyled.col};
+    gap: 8px;
+  } 
+`
+
 let Fio = styled.div`
-  ${commonStyled.centerV};
   flex-grow: 1;
   font: 500 24px var(--font-family-text);
   color: black;
@@ -52,7 +62,6 @@ let Fio = styled.div`
 Fio = React.memo(Fio) as unknown as typeof Fio
 
 let Info = styled.div`
-  ${commonStyled.centerV};
   justify-content: end;
   font: 500 18px var(--font-family-text);
   color: #424041;

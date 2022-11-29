@@ -1,5 +1,5 @@
-import React, {useCallback, useMemo} from "react";
-import {useScrollbar} from "./useScrollbar";
+import React, {useCallback, useLayoutEffect, useMemo, useState} from "react";
+import {useScrollbar} from "../HorizontalScrollbar/useScrollbar";
 
 
 export type UseGalleryScrollbarOptions = {
@@ -12,7 +12,7 @@ export const useGalleryScrollbar = (
     options: UseGalleryScrollbarOptions = { }
 ) => {
 
-    const [scrollProps, onContainerScroll, setContainerScroll] = useScrollbar(containerRef,contentRef,options)
+    const { scrollProps, onContainerScroll, setContainerScroll } = useScrollbar(containerRef,contentRef,options)
 
     const galleryScrollProps = useMemo(()=>{
         const elementW = scrollProps.scrollWidth / elementsCount
@@ -24,10 +24,23 @@ export const useGalleryScrollbar = (
         }
     },[scrollProps,elementsCount])
 
+
+    const [canScroll, setCanScroll] = useState(false)
+    useLayoutEffect(()=>{
+        setCanScroll(galleryScrollProps.elementsCount>=2)
+    },[scrollProps])
+
+
     const scrollToElementByIndex = useCallback((i: number) => {
         const elementW = galleryScrollProps.scrollWidth / galleryScrollProps.elementsCount
         setContainerScroll(elementW*i)
     },[galleryScrollProps, setContainerScroll])
 
-    return [galleryScrollProps, onContainerScroll, setContainerScroll, scrollToElementByIndex] as const
+    return {
+        galleryScrollProps,
+        onContainerScroll,
+        setContainerScroll,
+        scrollToElementByIndex,
+        canScroll,
+    }
 }

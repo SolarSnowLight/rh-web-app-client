@@ -2,7 +2,7 @@ import React, {useRef} from 'react'
 import css from './ObjcectCard2.module.scss'
 import buildingDefault from 'src/resources/images/building-default.png'
 import {wordUtils} from "src/utils/wordUtils";
-import {useGalleryScrollbar} from "src/hooks/useScrollbar/useGalleryScrollbar";
+import {useGalleryScrollbar} from "src/components/GalleryHorizontalScrollbar/useGalleryScrollbar";
 import GalleryHorizontalScrollbar from "src/components/GalleryHorizontalScrollbar/GalleryHorizontalScrollbar";
 import styled from "styled-components";
 import Arrow1DownIc from "src/components/icons/Arrow1DownIc";
@@ -27,7 +27,13 @@ const ObjectCard2 = (props: ObjectCardProps) => {
     const elementsCnt = o.images.length
     const containerRef = useRef<HTMLDivElement>(null)
     const contentRef = useRef<HTMLDivElement>(null)
-    const [scrollProps, onContainerScroll, setContainerScroll, scrollToElementByIndex] = useGalleryScrollbar(containerRef, contentRef, elementsCnt)
+    const {
+        galleryScrollProps: scrollProps,
+        onContainerScroll,
+        setContainerScroll,
+        scrollToElementByIndex,
+        canScroll
+    } = useGalleryScrollbar(containerRef, contentRef, elementsCnt)
 
     return <div className={css.frame}>
 
@@ -42,7 +48,7 @@ const ObjectCard2 = (props: ObjectCardProps) => {
         </div>
 
         <div className={css.controlElementsContainer}>
-            { elementsCnt>=2 && <GalleryHorizontalScrollbar className={css.scroll}
+            { canScroll && <GalleryHorizontalScrollbar className={css.scroll}
                                         scrollProps={scrollProps}
                                         setContainerScroll={setContainerScroll}
                                         scrollToElementByIndex={scrollToElementByIndex}/> }

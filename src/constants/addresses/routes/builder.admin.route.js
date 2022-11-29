@@ -19,6 +19,8 @@ const BuilderAdminRoute = {
     project_add_object: 'project/create/add/object',
     project_edit_object: 'project/create/edit/object',
 
+    main: 'main',
+
     // messenger
     messenger: 'messenger'
 };

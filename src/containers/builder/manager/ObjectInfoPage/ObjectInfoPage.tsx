@@ -246,6 +246,8 @@ const ObjectInfoPage = () => {
                 <FlatsTable floors={floors2} flats={flats2}/>
             </div>
 
+            <Space h='4em'/>
+
         </div>
     </>
 }

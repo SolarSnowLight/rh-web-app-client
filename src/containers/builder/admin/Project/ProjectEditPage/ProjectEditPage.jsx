@@ -23,7 +23,7 @@ import Space from 'src/components/Space';
 /* Hooks */
 import { useAppSelector, useAppDispatch } from 'src/hooks/redux.hook';
 import useHttp from 'src/hooks/http.hook';
-import { useScrollbar } from 'src/hooks/useScrollbar/useScrollbar';
+import { useScrollbar } from 'src/components/HorizontalScrollbar/useScrollbar';
 
 /* DTO */
 import ProjectUpdateDto from 'src/dtos/project.update-dto';

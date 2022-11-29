@@ -48,7 +48,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --testMatch '**/*.test.js' '**/*.test.ts' '**/*.test.jsx' '**/*.test.tsx'",
     "eject": "react-scripts eject",
     "__comment upd pkg__": "скрипт, запускающий процесс обновления пакетов",
     "update:packages:windows": "node wipe-dependencies.js && rd /s node_modules && npm update --save-dev && npm update --save",

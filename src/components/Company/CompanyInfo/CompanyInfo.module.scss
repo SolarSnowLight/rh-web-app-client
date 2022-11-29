@@ -5,39 +5,57 @@
 .mainFrame {
     * { @extend .reset }
     @extend .rowWrap;
-    gap: 48px 64px;
+    gap: 24px 64px;
+    width: fit-content;
 }
 
 .infoFrame {
     @extend .col;
-    width: 555px;
+    max-width: 555px;
+    @include common.mobileFullWidth;
 
     .titleContainer {
-        @extend .row;
-        gap: 23px;
+        @extend .rowWrap;
+        gap: 8px 23px;
+        @media (max-width: 550px) {
+            @include common.col;
+            align-items: start;
+        }
 
         .logo {
             height: 78px;
-            aspect-ratio: 1;
+            width: auto;
         }
         .title {
             font: 900 48px var(--font-family-text);
             color: black;
         }
     }
+    .infoItemsContainer {
+        @extend .col;
+        margin-top: 16px;
+        gap: 8px;
 
-    .infoItem {
-        font: 500 18px var(--font-family-text);
-        color: #8B8B8B;
-        letter-spacing: 0.05em;
+        .infoItem {
+            font: 500 18px var(--font-family-text);
+            color: #8B8B8B;
+            letter-spacing: 0.05em;
+            line-height: 150%;
+        }
     }
-
+    .buttonWrapper {
+        margin-top: 18px;
+        @media (max-width: 550px) {
+            margin-top: 8px;
+        }
+    }
 }
 .descriptionFrame {
-    min-width: 555px;
+    align-self: end;
     max-width: 709px;
     font: 500 18px var(--font-family-text);
     color: black;
     letter-spacing: 0.05em;
+    line-height: 150%;
 }
 

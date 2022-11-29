@@ -22,6 +22,8 @@
 }
 
 .nav-block__header{
+    box-sizing: border-box;
+
     grid-area: C;
 
     display: grid;

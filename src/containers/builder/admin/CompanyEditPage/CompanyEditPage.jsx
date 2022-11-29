@@ -16,6 +16,7 @@ import CircularIndeterminate from 'src/components/UI/CircularIndeterminate';
 import TextFieldControl from 'src/components/UI/TextField/TextFieldControl';
 import AutocompleteControl from 'src/components/UI/Autocomplete/AutocompleteControl';
 import ButtonGreenComponent from 'src/components/UI/Button/ButtonGreenComponent';
+import Space from "src/components/Space";
 
 /* Hooks */
 import { useAppSelector } from 'src/hooks/redux.hook';
@@ -134,110 +135,113 @@ const CompanyEditPage = () => {
     }, [open]);
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            {
-                (userSelector.isLoading) && <CircularIndeterminate />
-            }
-            <div className={styles['flex-container']}>
-                <div className={styles['flex-item']}>
-                    <span className={styles['span-text']}>Редактирование застройщика</span>
+        <>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                {
+                    (userSelector.isLoading) && <CircularIndeterminate />
+                }
+                <div className={styles['flex-container']}>
+                    <div className={styles['flex-item']}>
+                        <span className={styles['span-text']}>Редактирование застройщика</span>
+                    </div>
+                    <div className={styles['flex-item']}>
+                        <ImageUpload
+                            title={"Логотип *"}
+                            value={userSelector.company?.data.logo}
+                            onChange={onChangeImage}
+                        />
+                        <TextFieldControl
+                            title={"Описание"}
+                            control={control}
+                            errors={errors}
+                            name={"description"}
+                            defaultValue={userSelector.company?.data.description}
+                            multiline={true}
+                            rows={9}
+                            placeholder={"Описание"}
+                            changeHandler={changeHandler}
+                            styleContainer={{
+                                height: '18em'
+                            }}
+                        />
+                    </div>
+                    <div className={styles['flex-item']}>
+                        <TextFieldControl
+                            title={"Название *"}
+                            required={true}
+                            control={control}
+                            errors={errors}
+                            name={"title"}
+                            defaultValue={userSelector.company?.data.title}
+                            placeholder={"Введите название компании"}
+                            changeHandler={changeHandler}
+                        />
+                        <TextFieldControl
+                            title={"Email *"}
+                            required={true}
+                            control={control}
+                            errors={errors}
+                            name={"email_company"}
+                            defaultValue={userSelector.company?.data.email_company}
+                            placeholder={"Введите email"}
+                            changeHandler={changeHandler}
+                        />
+                        <TextFieldControl
+                            title={"Номер телефона *"}
+                            required={true}
+                            control={control}
+                            errors={errors}
+                            name={"phone"}
+                            defaultValue={userSelector.company?.data.phone}
+                            placeholder={"Введите номер телефона"}
+                            changeHandler={changeHandler}
+                            View={MuiTelInput}
+                        />
+                        <TextFieldControl
+                            title={"Ссылка на сайт *"}
+                            required={true}
+                            control={control}
+                            errors={errors}
+                            name={"link"}
+                            defaultValue={userSelector.company?.data.link}
+                            placeholder={"Введите ссылку"}
+                            changeHandler={changeHandler}
+                        />
+                    </div>
+                    <div className={styles['flex-item']}>
+                        <AutocompleteControl
+                            title={"Администратор компании"}
+                            control={control}
+                            errors={errors}
+                            name={"email_admin"}
+                            optionName={"email"}
+                            defaultValue={{ "email": userSelector.company?.data.email_admin }}
+                            placeholder={"Введите ссылку"}
+                            changeHandler={changeHandler}
+                            getOptionLabel={(option) => option.email}
+                            isOptionEqualToValue={(option, value) => option.email === value.email}
+                            options={options}
+                            loading={loadingAutocomplete}
+                            open={open}
+                            onOpen={() => {
+                                setOpen(true);
+                            }}
+                            onClose={() => {
+                                setOpen(false);
+                            }}
+                            readOnly={true}
+                        />
+                        <ButtonGreenComponent
+                            type={'submit'}
+                            variant={"contained"}
+                            disabled={btnDisabled}
+                            title={"Сохранить изменения"}
+                        />
+                    </div>
                 </div>
-                <div className={styles['flex-item']}>
-                    <ImageUpload
-                        title={"Логотип *"}
-                        value={userSelector.company?.data.logo}
-                        onChange={onChangeImage}
-                    />
-                    <TextFieldControl
-                        title={"Описание"}
-                        control={control}
-                        errors={errors}
-                        name={"description"}
-                        defaultValue={userSelector.company?.data.description}
-                        multiline={true}
-                        rows={9}
-                        placeholder={"Описание"}
-                        changeHandler={changeHandler}
-                        styleContainer={{
-                            height: '18em'
-                        }}
-                    />
-                </div>
-                <div className={styles['flex-item']}>
-                    <TextFieldControl
-                        title={"Название *"}
-                        required={true}
-                        control={control}
-                        errors={errors}
-                        name={"title"}
-                        defaultValue={userSelector.company?.data.title}
-                        placeholder={"Введите название компании"}
-                        changeHandler={changeHandler}
-                    />
-                    <TextFieldControl
-                        title={"Email *"}
-                        required={true}
-                        control={control}
-                        errors={errors}
-                        name={"email_company"}
-                        defaultValue={userSelector.company?.data.email_company}
-                        placeholder={"Введите email"}
-                        changeHandler={changeHandler}
-                    />
-                    <TextFieldControl
-                        title={"Номер телефона *"}
-                        required={true}
-                        control={control}
-                        errors={errors}
-                        name={"phone"}
-                        defaultValue={userSelector.company?.data.phone}
-                        placeholder={"Введите номер телефона"}
-                        changeHandler={changeHandler}
-                        View={MuiTelInput}
-                    />
-                    <TextFieldControl
-                        title={"Ссылка на сайт *"}
-                        required={true}
-                        control={control}
-                        errors={errors}
-                        name={"link"}
-                        defaultValue={userSelector.company?.data.link}
-                        placeholder={"Введите ссылку"}
-                        changeHandler={changeHandler}
-                    />
-                </div>
-                <div className={styles['flex-item']}>
-                    <AutocompleteControl
-                        title={"Администратор компании"}
-                        control={control}
-                        errors={errors}
-                        name={"email_admin"}
-                        optionName={"email"}
-                        defaultValue={{ "email": userSelector.company?.data.email_admin }}
-                        placeholder={"Введите ссылку"}
-                        changeHandler={changeHandler}
-                        getOptionLabel={(option) => option.email}
-                        isOptionEqualToValue={(option, value) => option.email === value.email}
-                        options={options}
-                        loading={loadingAutocomplete}
-                        open={open}
-                        onOpen={() => {
-                            setOpen(true);
-                        }}
-                        onClose={() => {
-                            setOpen(false);
-                        }}
-                        readOnly={true}
-                    />
-                    <ButtonGreenComponent
-                        type={'submit'}
-                        variant={"contained"}
-                        disabled={btnDisabled}
-                        title={"Сохранить изменения"}
-                    />
-                </div>
-            </div>
-        </form>
+            </form>
+            <Space h='4em'/>
+        </>
     );
 };
 

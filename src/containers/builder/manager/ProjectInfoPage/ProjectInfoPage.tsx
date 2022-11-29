@@ -3,12 +3,11 @@ import css from './ProjectInfoPage.module.scss'
 import ButtonWhite2 from "src/components/UI-Styled/Button/ButtonWhite2/ButtonWhite2";
 import {toast} from "react-toastify";
 import Space from "src/components/Space";
-import {useMediaQuery} from "@mui/material";
 import PersonListItem from "src/components/list-items/PersonListItem/PersonListItem";
 import MapComponent from 'src/components/Map/MapComponent';
 import ObjectCard2 from 'src/components/ObjectCard2/ObjectCard2';
 import HorizontalScrollbar from "src/components/HorizontalScrollbar/HorizontalScrollbar";
-import {useScrollbar} from "src/hooks/useScrollbar/useScrollbar";
+import {useScrollbar} from "src/components/HorizontalScrollbar/useScrollbar";
 
 
 import avaDefault from 'src/resources/images/ava-default.jpg'
@@ -79,7 +78,7 @@ const ProjectInfoPage = () => {
 
     const objectsContainerRef = useRef<HTMLDivElement>(null)
     const objectsContentRef = useRef<HTMLDivElement>(null)
-    const [scrollProps, onContainerScroll, setContainerScroll] = useScrollbar(objectsContainerRef, objectsContentRef)
+    const { scrollProps, onContainerScroll, setContainerScroll, canScroll } = useScrollbar(objectsContainerRef, objectsContentRef)
 
     return <div className={css.page}>
 
@@ -134,7 +133,9 @@ const ProjectInfoPage = () => {
         <Space h={8}/>
 
         <div className={css.scrollbarContainer}>
-            <HorizontalScrollbar className={css.scroll} scrollProps={scrollProps} setContainerScroll={setContainerScroll} />
+            { canScroll && <HorizontalScrollbar
+                className={css.scroll} scrollProps={scrollProps} setContainerScroll={setContainerScroll}
+            /> }
         </div>
 
 
@@ -165,7 +166,10 @@ const ProjectInfoPage = () => {
             </div>
             <Space h={24}/>
             <div className={css.showMore} onClick={onShowMore}>Показать ещё</div>
+            <Space h={24}/>
         </div>
+
+        <Space h='4em'/>
 
     </div>
 }

@@ -1,4 +1,4 @@
-import React, {useEffect, useLayoutEffect, useMemo, useRef, useState} from 'react'
+import React, {useEffect, useMemo, useRef, useState} from 'react'
 import css from './ModalImageViewer.module.scss'
 import CrossIc from "src/components/icons/Cross2Ic";
 import styled from "styled-components";
@@ -7,7 +7,7 @@ import {utils} from "src/utils/utils";
 import classNames from "classnames";
 import HorizontalScrollbar from "src/components/HorizontalScrollbar/HorizontalScrollbar";
 import {GetDimensions} from "src/utils/GetDimensions";
-import {useScrollbar} from "src/hooks/useScrollbar/useScrollbar";
+import {useScrollbar} from "src/components/HorizontalScrollbar/useScrollbar";
 import {useDisableHtmlScroll} from "src/hooks/useDisableHtmlScroll/useDisableHtmlScroll";
 
 
@@ -38,7 +38,7 @@ const ModalImageViewer = ({
     const selectedRef = useRef<HTMLDivElement>(null)
 
 
-    const [scrollProps, onContainerScroll, setContainerScroll] = useScrollbar(containerRef, contentRef)
+    const { scrollProps, onContainerScroll, setContainerScroll, canScroll } = useScrollbar(containerRef, contentRef)
 
 
     // autoscroll to selected image if it is not visible at all
@@ -105,7 +105,7 @@ const ModalImageViewer = ({
                     </div>) }
                 </div>
             </div>
-            <HorizontalScrollbar1 scrollProps={scrollProps} setContainerScroll={setContainerScroll}/>
+            { canScroll && <HorizontalScrollbar1 scrollProps={scrollProps} setContainerScroll={setContainerScroll}/> }
         </div>
     </div>
 }
@@ -126,6 +126,7 @@ let Arrow2Forward = styled(Arrow2ForwardIc).attrs({
 })``
 Arrow2Forward = React.memo(Arrow2Forward) as unknown as typeof Arrow2Forward
 
+
 let Arrow2Backward = styled(Arrow2ForwardIc).attrs({
     width: 18, height: 18,
     mainColor: '#F8F8F8',
@@ -133,6 +134,7 @@ let Arrow2Backward = styled(Arrow2ForwardIc).attrs({
     transform: rotate(180deg);
 `
 Arrow2Backward = React.memo(Arrow2Backward) as unknown as typeof Arrow2Backward
+
 
 let HorizontalScrollbar1 = styled(HorizontalScrollbar)`
   grid-area: scroll;

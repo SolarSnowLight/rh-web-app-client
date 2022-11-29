@@ -16,7 +16,7 @@ export const useScrollbar = (
         clientWidth: 0,
         scrollLeft: 0,
         scrollLeftMax: 0,
-        scrollWidth: 0
+        scrollWidth: 0,
     })
     const setScrollProps = useCallback((container: HTMLElement) => {
         const dimens = new GetDimensions(container)
@@ -28,6 +28,12 @@ export const useScrollbar = (
             scrollWidth: dimens.scrollWidth,
         })
     },[])
+
+
+    const [canScroll, setCanScroll] = useState(false)
+    useLayoutEffect(()=>{
+        setCanScroll(scrollProps.clientWidth!==scrollProps.scrollWidth)
+    },[scrollProps])
 
 
     useLayoutEffect(()=>{
@@ -65,5 +71,10 @@ export const useScrollbar = (
         setScrollProps(container)
     }
 
-    return [scrollProps, onContainerScroll, setContainerScroll] as const
+    return {
+        scrollProps,
+        onContainerScroll,
+        setContainerScroll,
+        canScroll,
+    }
 }

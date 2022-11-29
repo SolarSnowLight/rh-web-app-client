@@ -7,6 +7,7 @@ import { useMediaQuery } from '@mui/material';
 
 /* Контекст */
 import projectAction from 'src/store/actions/ProjectAction';
+import companyAction from 'src/store/actions/CompanyAction';
 import { authSlice } from 'src/store/reducers/AuthSlice';
 import messageQueueAction from 'src/store/actions/MessageQueueAction';
 
@@ -26,7 +27,7 @@ import MapObject from 'src/components/Map/MapObject';
 import { useAppSelector, useAppDispatch } from 'src/hooks/redux.hook';
 import { useMessageToastify } from 'src/hooks/message.toastify.hook';
 import useHttp from 'src/hooks/http.hook';
-import { useScrollbar } from 'src/hooks/useScrollbar/useScrollbar';
+import { useScrollbar } from 'src/components/HorizontalScrollbar/useScrollbar';
 
 /* Утилиты */
 import { dataURLToBlob, isDataURL } from 'src/utils/file';
@@ -38,7 +39,6 @@ import AdminApi from 'src/constants/addresses/apis/admin.api';
 
 /* Стили */
 import styles from './CreateProjectPage.module.scss';
-import companyAction from 'src/store/actions/CompanyAction';
 
 /* Ресурсы */
 import avaDefault from 'src/resources/images/ava-default.jpg'
@@ -227,159 +227,162 @@ const CreateProjectPage = () => {
     };
 
     return (
-        <form className={styles["wrapper-section"]} onSubmit={handleSubmit(onSubmit)}>
+        <>
+            <form className={styles["wrapper-section"]} onSubmit={handleSubmit(onSubmit)}>
 
-            { /* Обёртка элементов создания проекта */}
-            <div className={styles["wrapper-section__item"]}>
+                { /* Обёртка элементов создания проекта */}
+                <div className={styles["wrapper-section__item"]}>
 
-                { /* Заголовок создание проекта */}
-                <div className={styles["wrapper-section__item-element__column"]}>
-                    <span className='span__text__black-h3'>Создание проекта</span>
-                </div>
-
-                { /* Секция основных элементов ввода */}
-                <div className={styles["wrapper-section__item-element__column"]}>
-                    <div className={styles["item-element__column"]}>
-                        <ImageUpload
-                            value={projectSelector.logo}
-                            onChange={onChangeImage}
-                        />
-                        <TextFieldControl
-                            title={"Название *"}
-                            required={true}
-                            control={control}
-                            errors={errors}
-                            name={"title"}
-                            defaultValue={projectSelector.title}
-                            placeholder={"Введите название проекта"}
-                            changeHandler={changeHandler}
-                        />
-                        <AutocompleteControl
-                            multiple={true}
-                            title={"Менеджеры проекта"}
-                            control={control}
-                            errors={errors}
-                            name={"managers"}
-                            optionName={"email"}
-                            defaultValue={projectSelector?.managers}
-                            changeHandler={changeHandler}
-                            getOptionLabel={(option) => option.email}
-                            isOptionEqualToValue={(option, value) => option.email === value.email}
-                            options={options}
-                            loading={loadingAutocomplete}
-                            open={open}
-                            onOpen={() => {
-                                setOpen(true);
-                            }}
-                            onClose={() => {
-                                setOpen(false);
-                            }}
-                        />
+                    { /* Заголовок создание проекта */}
+                    <div className={styles["wrapper-section__item-element__column"]}>
+                        <span className='span__text__black-h3'>Создание проекта</span>
                     </div>
-                    <div className={styles["item-element__column"]}>
-                        <TextFieldControl
-                            title={"Описание"}
-                            control={control}
-                            errors={errors}
-                            name={"description"}
-                            defaultValue={projectSelector.description}
-                            multiline={true}
-                            rows={9}
-                            placeholder={"Описание"}
-                            changeHandler={changeHandler}
-                            styleContainer={{
-                                height: '18em'
-                            }}
-                        />
-                    </div>
-                </div>
-            </div>
 
-            { /* Секция компонента карты */}
-            <div className={styles["wrapper-section__item__map"]}>
-
-                { /* Элементы управления */}
-                <div className={styles["wrapper-section__item__map-element"]}>
-                    <div className={styles["grid-item__left"]}>
-                        <span className='span__text__black-h4'>Объекты проекта на карте</span>
-                    </div>
-                    <div className={styles["grid-item__right"]}>
-                        <ButtonWhiteComponent clickHandler={toCreateObject} title="Добавить объект" />
+                    { /* Секция основных элементов ввода */}
+                    <div className={styles["wrapper-section__item-element__column"]}>
+                        <div className={styles["item-element__column"]}>
+                            <ImageUpload
+                                value={projectSelector.logo}
+                                onChange={onChangeImage}
+                            />
+                            <TextFieldControl
+                                title={"Название *"}
+                                required={true}
+                                control={control}
+                                errors={errors}
+                                name={"title"}
+                                defaultValue={projectSelector.title}
+                                placeholder={"Введите название компании"}
+                                changeHandler={changeHandler}
+                            />
+                            <AutocompleteControl
+                                multiple={true}
+                                title={"Менеджеры компании"}
+                                control={control}
+                                errors={errors}
+                                name={"managers"}
+                                optionName={"email"}
+                                defaultValue={projectSelector?.managers}
+                                changeHandler={changeHandler}
+                                getOptionLabel={(option) => option.email}
+                                isOptionEqualToValue={(option, value) => option.email === value.email}
+                                options={options}
+                                loading={loadingAutocomplete}
+                                open={open}
+                                onOpen={() => {
+                                    setOpen(true);
+                                }}
+                                onClose={() => {
+                                    setOpen(false);
+                                }}
+                            />
+                        </div>
+                        <div className={styles["item-element__column"]}>
+                            <TextFieldControl
+                                title={"Описание"}
+                                control={control}
+                                errors={errors}
+                                name={"description"}
+                                defaultValue={projectSelector.description}
+                                multiline={true}
+                                rows={9}
+                                placeholder={"Описание"}
+                                changeHandler={changeHandler}
+                                styleContainer={{
+                                    height: '18em'
+                                }}
+                            />
+                        </div>
                     </div>
                 </div>
 
-                { /* Компонент карты */}
-                <div className={styles["wrapper-section__item-element__map"]}>
-                    <MapObject
-                        objects={projectSelector.objects}
-                        selectObject={selectIndex}
-                        setIndex={setIndex}
-                    />
-                </div>
-            </div>
+                { /* Секция компонента карты */}
+                <div className={styles["wrapper-section__item__map"]}>
 
-            { /* Секция карточек объектов проекта */}
-            <div className={styles["wrapper-section__item__map"]}>
-                { /* Объекты */}
-                <div ref={objectsContainerRef} className={styles.objectsListSlide} onScroll={onContainerScroll}>
-                    <div ref={objectsContentRef} className={styles.contentContainer}>
-                        {projectSelector.objects.map((it, index) => {
-                            return (
-                                <ObjectCard
-                                    key={it.id}
-                                    object={it}
-                                    logo={projectSelector.logo[0]}
-                                    select={(index == selectIndex) ? true : false}
-                                    clickHandler={() => {
-                                        setIndex(index);
-                                    }}
-                                    deleteHandler={() => {
-                                        dispatch(projectAction.deleteObjectInfo(it));
-                                    }}
-                                    editHandler={() => {
-                                        window.scrollTo(0, 0);
-                                        navigate(
-                                            (BuilderAdminRoute.builder_admin + '/' + BuilderAdminRoute.project_edit_object),
-                                            {
-                                                state: {
-                                                    object: {
-                                                        ...it
-                                                    },
-                                                    project: {
-                                                        title: projectSelector.title,
-                                                        description: projectSelector.description,
-                                                        logo: projectSelector.logo
+                    { /* Элементы управления */}
+                    <div className={styles["wrapper-section__item__map-element"]}>
+                        <div className={styles["grid-item__left"]}>
+                            <span className='span__text__black-h4'>Объекты проекта на карте</span>
+                        </div>
+                        <div className={styles["grid-item__right"]}>
+                            <ButtonWhiteComponent clickHandler={toCreateObject} title="Добавить объект" />
+                        </div>
+                    </div>
+
+                    { /* Компонент карты */}
+                    <div className={styles["wrapper-section__item-element__map"]}>
+                        <MapObject
+                            objects={projectSelector.objects}
+                            selectObject={selectIndex}
+                            setIndex={setIndex}
+                        />
+                    </div>
+                </div>
+
+                { /* Секция карточек объектов проекта */}
+                <div className={styles["wrapper-section__item__map"]}>
+                    { /* Объекты */}
+                    <div ref={objectsContainerRef} className={styles.objectsListSlide} onScroll={onContainerScroll}>
+                        <div ref={objectsContentRef} className={styles.contentContainer}>
+                            {projectSelector.objects.map((it, index) => {
+                                return (
+                                    <ObjectCard
+                                        key={it.id}
+                                        object={it}
+                                        logo={projectSelector.logo[0]}
+                                        select={(index == selectIndex) ? true : false}
+                                        clickHandler={() => {
+                                            setIndex(index);
+                                        }}
+                                        deleteHandler={() => {
+                                            dispatch(projectAction.deleteObjectInfo(it));
+                                        }}
+                                        editHandler={() => {
+                                            window.scrollTo(0, 0);
+                                            navigate(
+                                                (BuilderAdminRoute.builder_admin + '/' + BuilderAdminRoute.project_edit_object),
+                                                {
+                                                    state: {
+                                                        object: {
+                                                            ...it
+                                                        },
+                                                        project: {
+                                                            title: projectSelector.title,
+                                                            description: projectSelector.description,
+                                                            logo: projectSelector.logo
+                                                        }
                                                     }
                                                 }
-                                            }
-                                        );
-                                    }}
-                                />
-                            )
-                        })}
+                                            );
+                                        }}
+                                    />
+                                )
+                            })}
+                        </div>
+                    </div>
+
+                    <Space h={8} />
+
+                    { /* Горизонтальный скроллбар */}
+                    <div className={styles.scrollbarContainer}>
+                        <HorizontalScrollbar className={styles.scroll} scrollProps={scrollProps} setContainerScroll={setContainerScroll} />
                     </div>
                 </div>
 
-                <Space h={8} />
-
-                { /* Горизонтальный скроллбар */}
-                <div className={styles.scrollbarContainer}>
-                    <HorizontalScrollbar className={styles.scroll} scrollProps={scrollProps} setContainerScroll={setContainerScroll} />
-                </div>
-            </div>
-
-            <div className={styles["wrapper-section__item__map"]}>
-                <div className={styles["wrapper-section__item__map-element"]}>
-                    <div className={styles["grid-item__left"]}></div>
-                    <div className={styles["grid-item__right"]}>
-                        <ButtonGreenComponent
-                            type="submit"
-                            title="Создать проект"
-                        />
+                <div className={styles["wrapper-section__item__map"]}>
+                    <div className={styles["wrapper-section__item__map-element"]}>
+                        <div className={styles["grid-item__left"]}></div>
+                        <div className={styles["grid-item__right"]}>
+                            <ButtonGreenComponent
+                                type="submit"
+                                title="Создать проект"
+                            />
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
+            <Space h='4em'/>
+        </>
     )
 }
 

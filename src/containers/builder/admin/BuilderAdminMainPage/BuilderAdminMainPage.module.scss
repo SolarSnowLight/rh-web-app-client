@@ -1,0 +1,234 @@
+
+@use 'src/styles/common';
+
+
+
+
+.page {
+    * { @extend .reset }
+    width: 100%;
+    background: #F8F8F8;
+    @extend .col;
+    align-items: center;
+}
+.pageElement {
+    width: clamp(400px, 100%, 1920px);
+    padding: 0 64px 0 64px;
+    @media (max-width: 900px) {
+        padding: 0 16px 0 16px;
+    }
+}
+
+
+
+.companyInfoFrame {
+    @extend .pageElement;
+    @extend .center;
+    justify-content: center;
+}
+
+
+
+.titleFrame {
+    @extend .pageElement;
+    @extend .rowWrap;
+    width: 100%;
+    gap: 32px 64px;
+    justify-content: space-between;
+
+    @media (max-width: 900px) {
+        @include common.col;
+        justify-content: start;
+    }
+
+
+    .title {
+        font: 500 36px var(--font-family-text);
+        color: black;
+        justify-self: start;
+    }
+    .selectBox {
+        width: 300px; height: 59px;
+        @include common.mobileFullWidth;
+    }
+}
+
+
+.statisticsFrame {
+    @extend .pageElement;
+    @extend .rowWrap;
+    justify-content: center;
+    gap: 64px;
+
+    @media (max-width: 900px) {
+        @include common.col;
+        justify-content: start;
+    }
+
+    .listStatisticsContainer {
+        @extend .col;
+        gap: 64px;
+    }
+
+}
+
+.infoTitle {
+    font: 500 24px var(--font-family-text);
+    color: black;
+    letter-spacing: 0.05em;
+}
+.diagramFrame {
+    width: 100%;
+    @extend .center;
+
+    .diagramLayout {
+        width: fit-content; height: fit-content;
+        @extend .rowWrap;
+        gap: 64px;
+
+        @media (max-width: 900px) {
+            @include common.col;
+        }
+
+        .diagramContainer{
+            width: 400px; aspect-ratio: 1;
+            @extend .center;
+
+
+            @media (max-width: 900px) {
+                width: 100%;
+            }
+
+            .diagramBox {
+                width: 410px; height: 410px;
+                margin: -10px;
+
+                @media (max-width: 900px) {
+                    width: 100%; aspect-ratio: 1;
+                }
+            }
+        }
+
+        .legendBox {
+            width: 194px;
+            @extend .col;
+            gap: 16px;
+
+            @media (max-width: 900px) {
+                width: 100%;
+            }
+        }
+    }
+}
+
+
+
+.legendElement {
+    @extend .row;
+    gap: 16px;
+
+    .indicator {
+        width: 20px; height: 20px;
+        border-radius: 50%;
+    }
+    .title {
+        font: 400 16px var(--font-family-text);
+        color: #8B8B8B;
+        letter-spacing: 0.055em;
+    }
+}
+
+
+
+
+.listData {
+    width: 840px; height: fit-content;
+    padding: 32px 64px 64px;
+    background: #F8F8F8;
+    @extend .col;
+    gap: 32px;
+
+    @media (max-width: 900px) {
+        padding: 0;
+        background: none;
+        width: 100%;
+    }
+
+    .list {
+        @extend .col;
+        gap: 16px;
+    }
+}
+
+
+
+.developersTitleContainer {
+    @extend .pageElement;
+    @extend .rowWrap;
+    gap: 32px 64px;
+    justify-content: space-between;
+
+    @media (max-width: 900px) {
+        @include common.col;
+        justify-content: start;
+    }
+
+
+    .title {
+        font: 500 36px var(--font-family-text);
+        color: black;
+    }
+    .buttonBox {
+        width: 300px; height: 59px;
+    }
+
+
+}
+
+.developersListContainer{
+    @extend .pageElement;
+
+    .list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 32px 64px;
+        @media (max-width: 1400px) {
+            grid-template-columns: 1fr;
+        }
+    }
+    .showMore {
+        align-self: center;
+        font: 500 18px var(--font-family-text);
+        color: black;
+        letter-spacing: 0.05em;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+.listItemFrame {
+    height: 72px; width: 100%;
+    background: #D9D9D9;
+    @extend .row;
+    padding: 13px;
+    align-items: center;
+    gap: 64px;
+    justify-content: space-between;
+
+    .text {
+        font: 500 18px var(--font-family-text);
+        color: black;
+        letter-spacing: 0.05em;
+    }
+}
+
+

@@ -18,3 +18,5 @@ export const useMedia = (media: string) => {
 
     return matches
 }
+
+export const useMobile = ()=>useMedia("(max-width: 500px)")
