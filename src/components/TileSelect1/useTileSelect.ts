@@ -1,5 +1,5 @@
-import React, {useMemo, useState} from "react";
-import {Data, DataElement} from "./TileSelect1";
+import {useState} from "react";
+import {DataElement} from "./TileSelect1";
 
 
 
@@ -27,7 +27,6 @@ export const useTileSelect = (data: DataElement[]) => {
 
         if (type==='special'){
             if (id==='all') {
-                // todo
                 //  save selected ids (if 'nothing'/'all' weren't selected)
                 //  deselect all single ids and 'nothing'/'all'
                 //  select 'all'
@@ -60,7 +59,6 @@ export const useTileSelect = (data: DataElement[]) => {
                     }))
                 }
             } else if (id==='nothing'){
-                // todo
                 //  save selected ids (if 'all'/'nothing' weren't selected)
                 //  deselect all single ids and 'all'/'nothing'
                 //  select 'nothing'
@@ -94,7 +92,6 @@ export const useTileSelect = (data: DataElement[]) => {
                 }
             }
         } else if (type==='single'){
-            // todo
             //  deselect 'all' and 'nothing'
             //  add/remove selected id to selected ids
             setTileData(tileData.map(it=>{

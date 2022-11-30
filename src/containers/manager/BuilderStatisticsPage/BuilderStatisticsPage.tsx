@@ -73,18 +73,17 @@ const BuilderStatisticsPage = () => {
                     value={developer}
                     onChange={onDeveloper}
                     renderValue={(selected: any)=>{
+                        selected = selected as { id: string|null, name: string }
                         if (selected.id===null){
                             return <span data-placeholder-text>Застройщик</span>
                         }
                         return selected.name
                     }}
                 >
-                    {/*@ts-ignore*/}
-                    <MenuItem value={{ id: null, name: ''}}>
+                    <MenuItem value={{ id: null, name: ''} as any}>
                         <em>Не выбрано</em>
                     </MenuItem>
-                    {/*@ts-ignore*/}
-                    { mockData.developersToSelect.map(it=><MenuItem key={it.id} value={it}>{it.name}</MenuItem>) }
+                    { mockData.developersToSelect.map(it=><MenuItem key={it.id} value={it as any}>{it.name}</MenuItem>) }
                 </Select1>
             </div>
         </div>

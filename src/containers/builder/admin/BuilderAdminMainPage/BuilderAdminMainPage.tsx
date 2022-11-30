@@ -129,18 +129,17 @@ const BuilderAdminMainPage = () => {
                     value={project}
                     onChange={onProject}
                     renderValue={(selected: any)=>{
+                        selected = selected as { id: string|null, name: string }
                         if (selected.id===null){
                             return <span data-placeholder-text>Все проекты</span>
                         }
                         return selected.name
                     }}
                 >
-                    {/*@ts-ignore*/}
-                    <MenuItem value={{ id: null, name: ''}}>
+                    <MenuItem value={{ id: null, name: ''} as any}>
                         <em>Не выбрано</em>
                     </MenuItem>
-                    {/*@ts-ignore*/}
-                    { mockData.allProjects.map(it=><MenuItem key={it.id} value={it}>{it.name}</MenuItem>) }
+                    { mockData.allProjects.map(it=><MenuItem key={it.id} value={it as any}>{it.name}</MenuItem>) }
                 </Select1>
             </div>
         </div>
