@@ -43,6 +43,7 @@ export type IObjectCardProps = {
 
 const ObjectCard = (props: IObjectCardProps) => {
   const object = { ...props.object };
+
   object.images ??= [{ data_url: buildingDefault}];
 
   const elementCount = object.images.length;
