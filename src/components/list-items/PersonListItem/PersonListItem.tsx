@@ -47,7 +47,7 @@ Image = React.memo(Image) as unknown as typeof Image
 
 let TextDataWrapper = styled.div`
   display: contents;
-  @media (max-width: 550px) {
+  @media (max-width: 900px) {
     ${commonStyled.col};
     gap: 8px;
   } 

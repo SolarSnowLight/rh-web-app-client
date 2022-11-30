@@ -28,7 +28,11 @@ export type TileSelect1Props = {
 }
 export let TileSelect1 = <D extends any>(props: TileSelect1Props) => {
     return <div className={css.mainFrame}>
-        { props.dataElements.map(it=><Tile1 dataElement={it} onSelect={props.onSelect}/>) }
+        { props.dataElements.map(it=><Tile1
+            key={it.data.id.id+it.data.id.type}
+            dataElement={it}
+            onSelect={props.onSelect}
+        />) }
     </div>
 }
 TileSelect1 = React.memo(TileSelect1) as unknown as typeof TileSelect1
@@ -43,7 +47,6 @@ export type Tile1Props = {
 export let Tile1 = <D extends any>({ dataElement, onSelect }: Tile1Props) => {
     const { data, state } = dataElement
     return <div className={css.tile}
-                key={data.id.id+data.id.type}
                 onClick={()=>onSelect(dataElement)}
                 data-highlighted={state.isSelected}
     >

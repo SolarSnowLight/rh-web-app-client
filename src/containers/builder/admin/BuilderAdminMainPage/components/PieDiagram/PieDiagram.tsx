@@ -37,8 +37,8 @@ const MyResponsivePie = ({ fullData }: { fullData: FullData }) => {
 
         data={fullData.data}
         //theme={pieTheme}
-        startAngle={180}
-        endAngle={540}
+        startAngle={270}
+        endAngle={630}
         innerRadius={0.75}
         padAngle={2}
         activeOuterRadiusOffset={8}

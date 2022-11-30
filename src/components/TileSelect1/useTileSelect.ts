@@ -117,7 +117,7 @@ export const useTileSelect = (data: DataElement[]) => {
 
 /*
 
-    // old data:
+    // old mock data:
 
     let tileSelectData = Array(10).fill(undefined)
         .map((_,i)=>({ id: `project${i}`, name: `Проект ${i}` }))
@@ -139,7 +139,7 @@ export const useTileSelect = (data: DataElement[]) => {
 
 
 
-    // old onSelect:
+    // old onSelect. It has less code, but more complex:
 
 
     const [prev, _setPrev] = useState(['project1'] as React.Key[]) // previously selected ids

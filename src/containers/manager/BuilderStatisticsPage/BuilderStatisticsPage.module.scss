@@ -191,9 +191,12 @@
         font: 500 18px var(--font-family-text);
         color: black;
         letter-spacing: 0.05em;
+        cursor: pointer;
 
-        &:hover {
-            cursor: pointer;
+        &[aria-disabled=true]{
+            color: #8B8B8B;
+            cursor: auto;
+            pointer-events: none;
         }
     }
 }

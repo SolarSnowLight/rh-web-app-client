@@ -95,9 +95,7 @@ const BuilderAdminMainPage = () => {
                     </div>
                 </div>
                 <div className={css.list}>
-                    { Array(3).fill({ name: 'Тип квартиры', value: 'кол-во сделок' })
-                        .map(it=><ListItem2 key={it.name} name={it.name} value={it.value}/>)
-                    }
+                    { mockData.topObjects.map(it=><ListItem2 key={it.id} name={it.name} value={it.value}/>) }
                 </div>
             </div>
 
@@ -105,18 +103,14 @@ const BuilderAdminMainPage = () => {
                 <div className={css.listData}>
                     <div className={css.infoTitle}>Последние сделки</div>
                     <div className={css.list}>
-                        { Array(3).fill({ name: 'Менеджер, клиент, тип сделки', value: 'название проекта' })
-                            .map(it=><ListItem2 key={it.name} name={it.name} value={it.value}/>)
-                        }
+                        { mockData.lastDeals.map(it=><ListItem2 key={it.id} name={it.name} value={it.value}/>) }
                     </div>
                 </div>
 
                 <div className={css.listData}>
                     <div className={css.infoTitle}>Статистика по менеджерам</div>
                     <div className={css.list}>
-                        { Array(3).fill({ name: 'Менеджер ФИО', value: 'кол-во сделок' })
-                            .map(it=><ListItem2 key={it.name} name={it.name} value={it.value}/>)
-                        }
+                        { mockData.managerStatistics.map(it=><ListItem2 key={it.id} name={it.name} value={it.value}/>) }
                     </div>
                 </div>
             </div>
@@ -159,7 +153,11 @@ const BuilderAdminMainPage = () => {
             </div>
             <Space h={48}/>
             <div className={css.center}>
-                <div className={css.showMore} onClick={onShowMore}>Показать ещё</div>
+                <div className={css.showMore} onClick={onShowMore}
+                     aria-disabled={developersPages.itemsSize===developersPages.current.lastItemIdx+1}
+                >
+                    Показать ещё
+                </div>
             </div>
         </div>
 

@@ -9,93 +9,14 @@ import ListItem from "src/components/list-items/PersonListItem/PersonListItem";
 
 import avaDefault from 'src/resources/images/ava-default.jpg'
 import PieDiagram, {FullData} from "./components/PieDiagram/PieDiagram";
-import ProjectsSelect from "./components/ProjectsSelect/ProjectsSelect";
 import ButtonGreen2 from "src/components/UI-Styled/Button/ButtonGreen2/ButtonGreen2";
 import ButtonWhite2 from "src/components/UI-Styled/Button/ButtonWhite2/ButtonWhite2";
+import {mockData} from "./mockData";
+import {useTileSelect} from "src/components/TileSelect1/useTileSelect";
+import TileSelect1 from "src/components/TileSelect1/TileSelect1";
+import {usePages} from "../../../hooks/usePages/usePages";
 
 
-
-
-const diagramData = [
-    {
-        id: "initiated deals",
-        label: "Начатые сделки",
-        value: 250,
-        color: "#8B8B8B",
-        arcLabelColor: '#A6E2EF',
-        borderColor: '#8B8B8B',
-    },
-    {
-        id: "completed deals",
-        label: "Завершённые сделки",
-        value: 300,
-        color: "#A6E2EF",
-        arcLabelColor: '#FCFCFC',
-        borderColor: 'black',
-    },
-    {
-        id: "interested",
-        label: "Заинтересованные",
-        value: 450,
-        color: "#DCDCDC",
-        arcLabelColor: '#8B8B8B',
-        borderColor: '#DCDCDC',
-    },
-]
-const diagramFullData: FullData = {
-    totals: {
-        value: diagramData.reduce((sum,curr)=>sum+curr.value, 0),
-    },
-    data: diagramData
-}
-
-const diagramData2 = [
-    {
-        id: "initiated deals",
-        label: "Начатые сделки",
-        value: 350,
-        color: "#8B8B8B",
-        arcLabelColor: '#A6E2EF',
-        borderColor: '#8B8B8B',
-    },
-    {
-        id: "completed deals",
-        label: "Завершённые сделки",
-        value: 350,
-        color: "#A6E2EF",
-        arcLabelColor: '#FCFCFC',
-        borderColor: 'black',
-    },
-    {
-        id: "interested",
-        label: "Заинтересованные",
-        value: 500,
-        color: "#DCDCDC",
-        arcLabelColor: '#8B8B8B',
-        borderColor: '#DCDCDC',
-    },
-]
-const diagramFullData2: FullData = {
-    totals: {
-        value: diagramData2.reduce((sum,curr)=>sum+curr.value, 0),
-    },
-    data: diagramData2
-}
-
-
-
-
-const allDevelopers = Array(10).fill(undefined)
-    .map((_,i)=>({ id: `developer${i}`, name: `Застройщик ${i}` }))
-const developers = Array(10).fill(undefined).map((_,i)=>({
-    id: i,
-    ava: avaDefault,
-    fio: 'Иванов Иван Иванович',
-    projectsCnt: 2,
-    objectCnt: 12,
-}))
-const projects = Array(10).fill(undefined)
-    .map((_,i)=>({ id: `project${i}`, name: `Проект ${i}` }))
 
 
 
@@ -107,11 +28,13 @@ const BuilderStatisticsPage = () => {
         setDeveloper(ev.target.value)
     }
 
-    const [pieData, setPieData] = useState(diagramFullData)
+    const { tileData, onSelect } = useTileSelect(mockData.projectsTileSelect)
+
+    const [pieData, setPieData] = useState(mockData.diagramFullData)
     useEffect(()=>{
         let first = true
         const intervalId = setInterval(()=>{
-            setPieData(first ? diagramFullData2 : diagramFullData)
+            setPieData(first ? mockData.diagramFullData2 : mockData.diagramFullData)
             first = !first
         }, 3000)
         return ()=>clearInterval(intervalId)
@@ -121,8 +44,19 @@ const BuilderStatisticsPage = () => {
     const onCreateDeveloper = () => {
         toast.info('Создать застройщика')
     }
+
+
+    const [initialDevelopersPagesProps] = useState({ itemsSize: mockData.developers.length })
+    const [developersPages, developersActions] = usePages(initialDevelopersPagesProps)
+    const [developers, setDevelopers] = useState([] as typeof mockData.developers)
+    useEffect(()=>{
+        setDevelopers(developers.concat(mockData.developers.slice(
+            developersPages.current.firstItemIdx+developers.length,
+            developersPages.current.lastItemIdx+1
+        )))
+    },[developersPages])
     const onShowMore = () => {
-        toast.info('Показать ещё')
+        developersActions.showMore()
     }
 
 
@@ -150,7 +84,7 @@ const BuilderStatisticsPage = () => {
                         <em>Не выбрано</em>
                     </MenuItem>
                     {/*@ts-ignore*/}
-                    { allDevelopers.map(it=><MenuItem key={it.id} value={it}>{it.name}</MenuItem>) }
+                    { mockData.developersToSelect.map(it=><MenuItem key={it.id} value={it}>{it.name}</MenuItem>) }
                 </Select1>
             </div>
         </div>
@@ -161,7 +95,7 @@ const BuilderStatisticsPage = () => {
 
             <div className={css.listData}>
                 <div className={css.infoTitle}>Проекты</div>
-                <ProjectsSelect/>
+                <TileSelect1 dataElements={tileData} onSelect={onSelect}/>
                 <div className={css.diagramFrame}>
                     <div className={css.diagramLayout}>
                         <div className={css.diagramContainer}>
@@ -175,9 +109,7 @@ const BuilderStatisticsPage = () => {
                     </div>
                 </div>
                 <div className={css.list}>
-                    { Array(3).fill({ name: 'Тип квартиры', value: 'кол-во сделок' })
-                        .map(it=><ListItem2 key={it.name} name={it.name} value={it.value}/>)
-                    }
+                    { mockData.apartmentTypes.map(it=><ListItem2 key={it.id} name={it.name} value={it.value}/>) }
                 </div>
             </div>
 
@@ -185,18 +117,14 @@ const BuilderStatisticsPage = () => {
                 <div className={css.listData}>
                     <div className={css.infoTitle}>Последние сделки</div>
                     <div className={css.list}>
-                        { Array(3).fill({ name: 'Менеджер, клиент, тип сделки', value: 'название проекта' })
-                            .map(it=><ListItem2 key={it.name} name={it.name} value={it.value}/>)
-                        }
+                        { mockData.lastDeals.map(it=><ListItem2 key={it.id} name={it.name} value={it.value}/>) }
                     </div>
                 </div>
 
                 <div className={css.listData}>
                     <div className={css.infoTitle}>Статистика по менеджерам</div>
                     <div className={css.list}>
-                        { Array(3).fill({ name: 'Менеджер ФИО', value: 'кол-во сделок' })
-                            .map(it=><ListItem2 key={it.name} name={it.name} value={it.value}/>)
-                        }
+                        { mockData.managerStatistics.map(it=><ListItem2 key={it.id} name={it.name} value={it.value}/>) }
                     </div>
                 </div>
             </div>
@@ -218,7 +146,11 @@ const BuilderStatisticsPage = () => {
             </div>
             <Space h={24}/>
             <div className={css.center}>
-                <div className={css.showMore} onClick={onShowMore}>Показать ещё</div>
+                <div className={css.showMore} onClick={onShowMore}
+                     aria-disabled={developersPages.itemsSize===developersPages.current.lastItemIdx+1}
+                >
+                    Показать ещё
+                </div>
             </div>
         </div>
 

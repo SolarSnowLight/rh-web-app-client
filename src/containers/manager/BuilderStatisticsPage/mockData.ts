@@ -1,4 +1,3 @@
-import companyLogo from 'src/resources/images/company-logo-default.png';
 import {DataElement} from "src/components/TileSelect1/TileSelect1";
 import {FullData} from "./components/PieDiagram/PieDiagram";
 import avaDefault from 'src/resources/images/ava-default.jpg'
@@ -6,19 +5,10 @@ import avaDefault from 'src/resources/images/ava-default.jpg'
 
 
 
-const companyInfo = {
-    logo: companyLogo,
-    title: 'Company Name',
-    email: 'mail@mail.ru',
-    link: 'website.www.com',
-    phone: '+7129856192857',
-    description:
-        `Группа Аквилон - одна из ведущих девелоперских компаний, предоставляющих полный спектр услуг на рынке недвижимости, создана в Архангельске 13 октября 2003 года, более 18 лет на рынке.
-        Входит в ТОП-20 крупнейших застройщиков страны, в 10-ку крупнейших застройщиков Санкт-Петербурга.
-        Группа Аквилон признана системообразующим предприятием России.
-        География присутствия: Москва, Санкт-Петербург, Ленинградская область, Архангельск, Северодвинск.`,
-}
 
+const developersToSelect = [...Array(10).keys()].map(i=>({
+    id: `${i}`, name: `Застройщик ${i+1}`
+}))
 
 
 
@@ -46,7 +36,15 @@ projectsTileSelect = [
 
 const diagramData = [
     {
-        id: "completed",
+        id: "initiated deals",
+        label: "В процессе",
+        value: 250,
+        color: "#8B8B8B",
+        arcLabelColor: '#A6E2EF',
+        borderColor: '#8B8B8B',
+    },
+    {
+        id: "completed deals",
         label: "Завершённые",
         value: 300,
         color: "#A6E2EF",
@@ -54,20 +52,12 @@ const diagramData = [
         borderColor: 'black',
     },
     {
-        id: "viewed",
+        id: "interested",
         label: "Просмотренные",
         value: 450,
         color: "#DCDCDC",
         arcLabelColor: '#8B8B8B',
         borderColor: '#DCDCDC',
-    },
-    {
-        id: "in progress",
-        label: "В процессе",
-        value: 250,
-        color: "#8B8B8B",
-        arcLabelColor: '#A6E2EF',
-        borderColor: '#8B8B8B',
     },
 ]
 const diagramFullData: FullData = {
@@ -79,8 +69,8 @@ const diagramFullData: FullData = {
 
 const diagramData2 = [
     { ...diagramData[0], value: 350},
-    { ...diagramData[1], value: 500},
-    { ...diagramData[2], value: 350},
+    { ...diagramData[1], value: 350},
+    { ...diagramData[2], value: 500},
 ]
 const diagramFullData2: FullData = {
     totals: {
@@ -91,8 +81,8 @@ const diagramFullData2: FullData = {
 
 
 
-const topObjects = [...Array(3).keys()].map(i=>({
-    id: i+'', name: `Объект топ ${i+1}`, value: 'кол-во сделок'
+const apartmentTypes = [...Array(3).keys()].map(i=>({
+    id: i+'', name: `Тип квартиры`, value: 'кол-во сделок'
 }))
 
 const lastDeals = [...Array(3).keys()].map(i=>({
@@ -118,20 +108,15 @@ const developers = Array(67).fill(undefined).map((_,i)=>({
 
 
 
-const allProjects = Array(10).fill(undefined)
-    .map((_,i)=>({ id: `project${i}`, name: `Проект ${i}` }))
-
-
 
 
 export const mockData = {
-    companyInfo,
+    developersToSelect,
     projectsTileSelect,
     diagramFullData,
     diagramFullData2,
-    topObjects,
+    apartmentTypes,
     lastDeals,
     managerStatistics,
     developers,
-    allProjects,
 }
