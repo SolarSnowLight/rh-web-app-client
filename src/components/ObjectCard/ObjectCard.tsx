@@ -1,4 +1,4 @@
-import React, {useRef} from 'react'
+import React, {useRef, useState} from 'react'
 import css from './ObjectCard.module.scss'
 import buildingDefault from 'src/resources/images/building-default.png'
 import {wordUtils} from "src/utils/wordUtils";
@@ -35,6 +35,10 @@ const ObjectCard = (props: ObjectCardProps) => {
         canScroll
     } = useGalleryScrollbar(containerRef, contentRef, elementsCnt)
 
+    const [showMenu, setShowMenu] = useState(false)
+    const onMenu = () => setShowMenu(true)
+
+
     return <div className={css.frame}>
 
         <div className={css.imagesFrame} ref={containerRef} onScroll={onContainerScroll}>
@@ -52,6 +56,10 @@ const ObjectCard = (props: ObjectCardProps) => {
                                         scrollProps={scrollProps}
                                         setContainerScroll={setContainerScroll}
                                         scrollToElementByIndex={scrollToElementByIndex}/> }
+
+            { !showMenu && <div className={css.menuBtn} onClick={onMenu}>
+                <Arrow1DownIc className={css.menuBtnIcon} mainColor='black' />
+            </div> }
 
             {/*<HoverDetectorLeft />
             <ArrowBoxLeft

@@ -12,6 +12,7 @@ import TileSelect1, {DataElement} from "src/components/TileSelect1/TileSelect1";
 import {useTileSelect} from "src/components/TileSelect1/useTileSelect";
 import {LegendElement, ListItem2, Select1} from "./components";
 import {InitialPageProps, usePages} from "src/hooks/usePages/usePages";
+import {ReactMemoTyped} from "src/utils/utilsReact"
 
 // test imports
 import {mockData} from "./mockData";
@@ -164,6 +165,6 @@ const BuilderAdminMainPage = () => {
 
     </div>
 }
-export default React.memo(BuilderAdminMainPage) as unknown as typeof BuilderAdminMainPage
+export default ReactMemoTyped(BuilderAdminMainPage)
 
 

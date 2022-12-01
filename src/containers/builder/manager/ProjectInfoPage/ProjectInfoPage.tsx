@@ -1,4 +1,4 @@
-import React, {useRef} from 'react'
+import React from 'react'
 import css from './ProjectInfoPage.module.scss'
 import ButtonWhite2 from "src/components/UI-Styled/Button/ButtonWhite2/ButtonWhite2";
 import {toast} from "react-toastify";

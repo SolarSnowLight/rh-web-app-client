@@ -54,16 +54,20 @@
     .controlElementsContainer {
         grid-area: image;
         display: grid;
-        grid: 'left   .      right ' 1fr
+        /*grid: 'left   .      right ' 1fr
               'scroll scroll scroll'
-              / 20% 1fr 20% ;
+              / 20% 1fr 20% ;*/
+        grid: 'tl t tr'
+              'l  c r ' 1fr
+              'bl b br'
+            / auto 1fr auto;
+        z-index: 1;
 
         .scroll {
-            grid-area: scroll;
+            grid-area: b / bl / b / br;
             place-self: end stretch;
             padding-right: 40px;
             padding-left: 40px;
-            z-index: 1;
 
             /*[id$=thumb-box]{
                 padding: 2px 3px;
@@ -72,6 +76,21 @@
                 background: rgba(0,0,0,0.5);
             }*/
         }
+
+        .menuBtn {
+            grid-area: tr;
+            place-self: start end;
+            height: 22px;
+            width: 38px;
+            cursor: pointer;
+            @extend .center;
+
+            .menuBtnIcon {
+                width: 22px;
+            }
+        }
+
+
         /*.arrowLeftBox {
             grid-area: left / left / scroll / left;
             place-self: stretch;
