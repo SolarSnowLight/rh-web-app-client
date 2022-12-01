@@ -2,12 +2,16 @@ import React from 'react'
 import css from './CardMenu.module.scss'
 import {ReactMemoTyped} from "src/utils/utilsReact"
 import Menu from '@mui/material/Menu'
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Typography from '@mui/material/Typography';
 import MenuItem from "@mui/material/MenuItem"
 import {empty} from "src/utils/utils";
+import EditIcon from '@mui/icons-material/Edit';
+import ClearIcon from '@mui/icons-material/Clear';
 
 
 const cardMenuItems = [
-    { id: 'change', title: 'Изменить' },
+    { id: 'edit', title: 'Изменить' },
     { id: 'remove', title: 'Удалить' },
 ] as const
 export type CardMenuItemIds = typeof cardMenuItems[number]['id']
@@ -42,8 +46,14 @@ const CardMenu = (props: CardMenuProps) => {
         }}
     >
         { cardMenuItems.map(it=>
-            <MenuItem key={it.id} onClick={()=>onSelect(it.id)}>{it.title}</MenuItem>)
-        }
+            <MenuItem key={it.id} onClick={()=>onSelect(it.id)}>
+                <ListItemIcon>
+                    { it.id==='edit' && <EditIcon fontSize="small" /> }
+                    { it.id==='remove' && <ClearIcon fontSize="small" /> }
+                </ListItemIcon>
+                <Typography variant="inherit">{it.title}</Typography>
+            </MenuItem>
+        )}
     </Menu>
 }
 

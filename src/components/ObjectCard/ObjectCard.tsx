@@ -9,6 +9,7 @@ import Arrow1DownIc from "src/components/icons/Arrow1DownIc";
 import {commonStyled} from "src/styles/commonStyled";
 import CardMenu, {CardMenuItemIds} from "./components/CardMenu/CardMenu";
 import {toast} from "react-toastify";
+import {ReactMemoTyped} from "../../utils/utilsReact";
 
 type empty = null|undefined
 
@@ -48,7 +49,7 @@ const ObjectCard = (props: ObjectCardProps) => {
     const onMenuItemSelect = (id: CardMenuItemIds)=>{
         onMenuClose()
         switch (id){
-            case "change":
+            case "edit":
                 toast.info('Изменить')
                 break
             case "remove":
@@ -105,7 +106,7 @@ const ObjectCard = (props: ObjectCardProps) => {
         { o.objectsCnt && <div className={css.count}>{o.objectsCnt} {wordUtils.objectsPlural(o.objectsCnt)}</div> }
     </div>
 }
-export default React.memo(ObjectCard) as unknown as typeof ObjectCard
+export default ReactMemoTyped(ObjectCard)
 
 
 
