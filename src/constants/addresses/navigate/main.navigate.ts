@@ -13,7 +13,7 @@ export const MainNavigate = [
     },
     {
         title: 'Поиск',
-        url: BuilderAdminRoute.builder_admin + '/' + BuilderAdminRoute.project_list,
+        url: MainRoute.objects_search,
     },
     {
         title: 'Карта сайта',
