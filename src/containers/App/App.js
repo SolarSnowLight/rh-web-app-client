@@ -1,24 +1,24 @@
 /* Libraries */
 import React, { useEffect, useState } from "react";
-import useRoutes from '../../routes/routes';
+import useRoutes from 'src/routes/routes';
 import { BrowserRouter } from "react-router-dom";
 import { registerLocale } from "react-datepicker";
 import { ToastContainer } from "react-toastify";
 import ru from "date-fns/locale/ru";
 
 /* Context */
-import { authUpdate } from "../../store/actions/AuthAction";
+import { authUpdate } from "src/store/actions/AuthAction";
 import userAction from "src/store/actions/UserAction";
 
 /* Components */
-import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
+import Navbar from "src/components/Navbar";
+import Footer from "src/components/Footer";
 
 /* HOC */
 import WithToastify from "src/hoc-helpers/WithToastify";
 
 /* Hooks */
-import { useAppDispatch, useAppSelector } from '../../hooks/redux.hook';
+import { useAppDispatch, useAppSelector } from 'src/hooks/redux.hook';
 import { useMessageToastify } from "src/hooks/message.toastify.hook";
 
 /* Styles */
@@ -30,39 +30,39 @@ import styles from './App.module.css';
 registerLocale("ru", ru);
 
 const App = () => {
-  const authSelector = useAppSelector(state => state.authReducer);
-  const dispatch = useAppDispatch();
+    const authSelector = useAppSelector(state => state.authReducer);
+    const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(authUpdate());
-  }, []);
+    useEffect(() => {
+        dispatch(authUpdate());
+    }, []);
 
-  useEffect(() => {
-    if (authSelector.access_token) {
-      dispatch(userAction.getUserCompany(authSelector.access_token));
-    }
-  }, [authSelector.access_token]);
+    useEffect(() => {
+        if (authSelector.access_token) {
+            dispatch(userAction.getUserCompany(authSelector.access_token));
+        }
+    }, [authSelector.access_token]);
 
-  const routes = useRoutes(authSelector.isAuthenticated);
+    const routes = useRoutes(authSelector.isAuthenticated);
 
-  return (
-    <BrowserRouter>
-      <Navbar />
-      {routes}
-      <Footer />
-      <ToastContainer
-        position="bottom-left"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
-    </BrowserRouter>
-  )
+    return (
+        <BrowserRouter>
+            <Navbar/>
+            {routes}
+            <Footer/>
+            <ToastContainer
+                position="bottom-left"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
+        </BrowserRouter>
+    )
 }
 
 export default App;

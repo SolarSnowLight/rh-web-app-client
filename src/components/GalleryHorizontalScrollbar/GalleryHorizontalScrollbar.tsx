@@ -1,16 +1,11 @@
 import React, {
-    useCallback,
     useId,
     useImperativeHandle,
-    useLayoutEffect,
-    useMemo,
     useRef,
-    useState
 } from 'react'
 import css from './GalleryHorizontalScrollbar.module.scss'
 import classNames from "classnames";
-import {GetDimensions} from "src/utils/GetDimensions";
-import {utils} from "src/utils/utils";
+import { ReactMemoTyped } from 'src/utils/utilsReact';
 
 
 
@@ -53,6 +48,7 @@ const GalleryHorizontalScrollbar = React.forwardRef<GalleryHorizontalScrollbarRe
             if (i%2===0){
                 const index = i/2
                 return <div
+                    key={i}
                     id={`${id}-track-segment`}
                     className={css.trackSegment}
                     onClick={()=>scrollToElementByIndex(index)}
@@ -65,9 +61,9 @@ const GalleryHorizontalScrollbar = React.forwardRef<GalleryHorizontalScrollbarRe
                     </div>
                 </div>
             } else {
-                return <div id={`${id}-gap`} className={css.gap}/>
+                return <div key={i} id={`${id}-gap`} className={css.gap}/>
             }
         })}
     </div>
 })
-export default React.memo(GalleryHorizontalScrollbar)
+export default ReactMemoTyped(GalleryHorizontalScrollbar)

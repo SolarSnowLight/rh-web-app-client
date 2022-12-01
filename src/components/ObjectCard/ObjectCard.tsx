@@ -7,6 +7,8 @@ import GalleryHorizontalScrollbar from "src/components/GalleryHorizontalScrollba
 import styled from "styled-components";
 import Arrow1DownIc from "src/components/icons/Arrow1DownIc";
 import {commonStyled} from "src/styles/commonStyled";
+import CardMenu, {CardMenuItemIds} from "./components/CardMenu/CardMenu";
+import {toast} from "react-toastify";
 
 type empty = null|undefined
 
@@ -35,8 +37,25 @@ const ObjectCard = (props: ObjectCardProps) => {
         canScroll
     } = useGalleryScrollbar(containerRef, contentRef, elementsCnt)
 
-    const [showMenu, setShowMenu] = useState(false)
-    const onMenu = () => setShowMenu(true)
+    const [muiMenuAnchor, setMuiMenuAnchor] = useState(null as HTMLElement | null)
+    const showMenu = !!muiMenuAnchor
+    const onMenuShow = (ev: React.MouseEvent<HTMLElement>) => {
+        setMuiMenuAnchor(ev.currentTarget)
+    }
+    const onMenuClose = ()=>{
+        setMuiMenuAnchor(null)
+    }
+    const onMenuItemSelect = (id: CardMenuItemIds)=>{
+        onMenuClose()
+        switch (id){
+            case "change":
+                toast.info('Изменить')
+                break
+            case "remove":
+                toast.info('Удалить')
+                break
+        }
+    }
 
 
     return <div className={css.frame}>
@@ -57,9 +76,14 @@ const ObjectCard = (props: ObjectCardProps) => {
                                         setContainerScroll={setContainerScroll}
                                         scrollToElementByIndex={scrollToElementByIndex}/> }
 
-            { !showMenu && <div className={css.menuBtn} onClick={onMenu}>
+            <div className={css.menuBtn} onClick={onMenuShow}
+                aria-controls={showMenu ? 'object-card-menu' : undefined}
+                aria-haspopup="true"
+                aria-expanded={showMenu ? 'true' : undefined}
+            >
                 <Arrow1DownIc className={css.menuBtnIcon} mainColor='black' />
-            </div> }
+            </div>
+            <CardMenu menuAnchorEl={muiMenuAnchor} onClose={onMenuClose} onSelect={onMenuItemSelect}/>
 
             {/*<HoverDetectorLeft />
             <ArrowBoxLeft

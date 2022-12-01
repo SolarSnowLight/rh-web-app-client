@@ -7,9 +7,10 @@ import PersonListItem from "src/components/list-items/PersonListItem/PersonListI
 import MapComponent from 'src/components/Map/MapComponent';
 import { useMedia } from 'src/hooks/useMedia';
 import ProjectInfo2 from 'src/components/Company/ProjectInfo2/ProjectInfo2';
+import ObjectCardList from "src/components/ObjectCardList/ObjectCardList";
+import {ReactMemoTyped} from "src/utils/utilsReact";
 
 import {mockData} from "./mockData";
-import ObjectCardList from "src/components/ObjectCardList/ObjectCardList";
 
 
 
@@ -106,4 +107,4 @@ const ProjectInfoPage = () => {
 
     </div>
 }
-export default React.memo(ProjectInfoPage) as unknown as typeof ProjectInfoPage
+export default ReactMemoTyped(ProjectInfoPage)
