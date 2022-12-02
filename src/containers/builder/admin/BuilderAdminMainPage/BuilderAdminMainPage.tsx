@@ -78,37 +78,39 @@ const BuilderAdminMainPage = () => {
 
         <Space h={26} />
 
-        <div className={css.statisticsFrame}>
+        <div className={css.statFrame}>
 
-            <div className={css.listData}>
-                <div className={css.infoTitle}>Проекты</div>
-                <TileSelect1 dataElements={tileData} onSelect={onSelect}/>
-                <div className={css.diagramFrame}>
-                    <div className={css.diagramLayout}>
-                        <div className={css.diagramContainer}>
-                            <div className={css.diagramBox}>
-                                <PieDiagram fullData={pieData}/>
+            <div className={css.column}>
+                <div className={css.statWidget}>
+                    <div className={css.infoTitle}>Проекты</div>
+                    <TileSelect1 dataElements={tileData} onSelect={onSelect}/>
+                    <div className={css.diagramFrame}>
+                        <div className={css.diagramLayout}>
+                            <div className={css.diagramContainer}>
+                                <div className={css.diagramBox}>
+                                    <PieDiagram fullData={pieData}/>
+                                </div>
+                            </div>
+                            <div className={css.legendBox}>
+                                { pieData.data.map(it=><LegendElement key={it.id} color={it.color} title={it.label}/>) }
                             </div>
                         </div>
-                        <div className={css.legendBox}>
-                            { pieData.data.map(it=><LegendElement key={it.id} color={it.color} title={it.label}/>) }
-                        </div>
                     </div>
-                </div>
-                <div className={css.list}>
-                    { mockData.topObjects.map(it=><ListItem2 key={it.id} name={it.name} value={it.value}/>) }
+                    <div className={css.list}>
+                        { mockData.topObjects.map(it=><ListItem2 key={it.id} name={it.name} value={it.value}/>) }
+                    </div>
                 </div>
             </div>
 
-            <div className={css.listStatisticsContainer}>
-                <div className={css.listData}>
+            <div className={css.column}>
+                <div className={css.statWidget}>
                     <div className={css.infoTitle}>Последние сделки</div>
                     <div className={css.list}>
                         { mockData.lastDeals.map(it=><ListItem2 key={it.id} name={it.name} value={it.value}/>) }
                     </div>
                 </div>
 
-                <div className={css.listData}>
+                <div className={css.statWidget}>
                     <div className={css.infoTitle}>Статистика по менеджерам</div>
                     <div className={css.list}>
                         { mockData.managerStatistics.map(it=><ListItem2 key={it.id} name={it.name} value={it.value}/>) }

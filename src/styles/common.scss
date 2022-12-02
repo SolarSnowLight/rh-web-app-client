@@ -13,6 +13,10 @@
     display: flex;
     flex-flow: row nowrap;
 }
+@mixin row {
+    display: flex;
+    flex-flow: row nowrap;
+}
 .rowWrap {
     display: flex;
     flex-flow: row wrap;
