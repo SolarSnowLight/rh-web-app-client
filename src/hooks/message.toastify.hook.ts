@@ -1,10 +1,11 @@
 import { useCallback } from 'react';
 import { toast } from 'react-toastify';
+import { empty } from 'src/types/empty';
 
 // toast.configure();
 
 export const useMessageToastify = () => {
-    return useCallback((text, type) => {
+    return useCallback((text: string | empty, type: string | empty) => {
         if (text) {
             if (type === "info") {
                 toast.info(text);

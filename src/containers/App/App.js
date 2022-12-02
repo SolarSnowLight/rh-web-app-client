@@ -1,35 +1,36 @@
 /* Libraries */
 import React, { useEffect, useState } from "react";
-import useRoutes from 'src/routes/routes';
+import useRoutes from '../../routes/routes';
 import { BrowserRouter } from "react-router-dom";
 import { registerLocale } from "react-datepicker";
 import { ToastContainer } from "react-toastify";
 import ru from "date-fns/locale/ru";
 
 /* Context */
-import { authUpdate } from "src/store/actions/AuthAction";
+import { authUpdate } from "../../store/actions/AuthAction";
 import userAction from "src/store/actions/UserAction";
 
 /* Components */
-import Navbar from "src/components/Navbar";
-import Footer from "src/components/Footer";
-
-/* HOC */
-import WithToastify from "src/hoc-helpers/WithToastify";
+import NavbarMain from "src/components/Navbar/NavbarMain";
+import Footer from "../../components/Footer";
 
 /* Hooks */
-import { useAppDispatch, useAppSelector } from 'src/hooks/redux.hook';
-import { useMessageToastify } from "src/hooks/message.toastify.hook";
+import { useAppDispatch, useAppSelector } from '../../hooks/redux.hook';
 
 /* Styles */
 import "react-datepicker/dist/react-datepicker.css";
 import 'react-toastify/dist/ReactToastify.css';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import styles from './App.module.css';
 
+// Регистрация русской локализации для компонента react-datepicker
 registerLocale("ru", ru);
 
+/**
+ * Функциональный компонент точки входа в веб-приложение
+ * @returns {JSX.Element} React-элемент
+ */
 const App = () => {
+    // Селектор авторизационных данных пользователя
     const authSelector = useAppSelector(state => state.authReducer);
     const dispatch = useAppDispatch();
 
@@ -43,25 +44,28 @@ const App = () => {
         }
     }, [authSelector.access_token]);
 
+    // Подключение маршрутизации
     const routes = useRoutes(authSelector.isAuthenticated);
 
     return (
-        <BrowserRouter>
-            <Navbar/>
-            {routes}
-            <Footer/>
-            <ToastContainer
-                position="bottom-left"
-                autoClose={2000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-            />
-        </BrowserRouter>
+        <>
+            <BrowserRouter>
+                <NavbarMain />
+                {routes}
+                <Footer />
+                <ToastContainer
+                    position="bottom-left"
+                    autoClose={2000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                />
+            </BrowserRouter>
+        </>
     )
 }
 
