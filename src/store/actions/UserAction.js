@@ -10,7 +10,10 @@ import MainApi from "src/constants/addresses/apis/main.api";
 import UserApi from "src/constants/addresses/apis/user.api";
 import CompanyApi from "src/constants/addresses/apis/company.api";
 
-/* Function for get company for current user */
+/**
+ * Функция для получения информации о компании пользователя
+ * @returns {Promise<void>}
+ */
 export const getUserCompany = () => async (dispatch) => {
     dispatch(userSlice.actions.loadingStart());
 
@@ -40,7 +43,12 @@ export const getUserCompany = () => async (dispatch) => {
     dispatch(userSlice.actions.loadingEnd());
 };
 
-/* Function for update information about company for current user */
+/**
+ * Функция обновления информации о компании
+ * @param {*} data Данные для обновления
+ * @param {*} logo Логотип компании
+ * @returns {Promise<any>}
+ */
 const companyInfoUpdate = (data, logo) => async (dispatch) => {
     dispatch(userSlice.actions.loadingStart());
 
@@ -76,6 +84,40 @@ const companyInfoUpdate = (data, logo) => async (dispatch) => {
     dispatch(userSlice.actions.loadingEnd());
 };
 
+/**
+ * Функция для получения информации о пользовательских ролях
+ * @returns {Promise<any>}
+ */
+const getUserRoles = () => async (dispatch) => {
+    dispatch(userSlice.actions.loadingStart());
+
+    try{
+        const response = await apiMainServer.post(
+            UserApi.get_user_roles
+        );
+
+        if (response.status != 200 && response.status != 201) {
+            dispatch(messageQueueAction(response.data.message, "error"));
+            return;
+        }
+
+        if(response.data) {
+            dispatch(userSlice.actions.getUserRolesSuccess(response.data.roles));
+        }
+    }catch(e) {
+        dispatch(messageQueueAction.errorMessage(e));
+    }
+
+
+    dispatch(userSlice.actions.loadingEnd());
+}
+
+/**
+ * Функция обновления элемента информации о компании
+ * @param {*} item Ключ элемента
+ * @param {*} value Значение элемента
+ * @returns {Promise<any>}
+ */
 const setItemCompanyInfo = (item, value) => async (dispatch) => {
     dispatch(userSlice.actions.loadingStart());
 
@@ -91,7 +133,8 @@ const setItemCompanyInfo = (item, value) => async (dispatch) => {
 const userAction = {
     getUserCompany,
     companyInfoUpdate,
-    setItemCompanyInfo
+    setItemCompanyInfo,
+    getUserRoles
 };
 
 export default userAction;

@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 /* Base state for current slice */
 const initialState = {
     company: null,
+    roles: [],
     isLoading: false
 };
 
@@ -21,7 +22,17 @@ export const userSlice = createSlice({
 
         clear(state) {
             state.company = null;
+            state.roles = [];
             state.isLoading = false;
+        },
+
+        getUserRolesSuccess(state, action) {
+            state.isLoading = false;
+            state.error = "";
+
+            if(action.payload) {
+                state.roles = action.payload;
+            }
         },
 
         getUserCompanySuccess(state, action) {

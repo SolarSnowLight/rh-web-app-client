@@ -48,6 +48,11 @@ import DrawerOption from './components/DrawerOption';
 import BuilderAdminOption from './options/BuilderAdminOption';
 import BuilderManagerOption from './options/BuilderManagerOption';
 import { authLogout } from 'src/store/actions/AuthAction';
+import userAction from 'src/store/actions/UserAction';
+import ClientOption from './options/ClientOption';
+import { UserRoleValue } from 'src/constants/values/user.role.value';
+import AdminOption from './options/AdminOption';
+import ManagerOption from './options/ManagerOption';
 
 /**
  * Меню навигационной системы
@@ -55,6 +60,7 @@ import { authLogout } from 'src/store/actions/AuthAction';
  */
 const NavbarMenu = () => {
     const authSelector = useAppSelector((state) => state.authReducer);
+    const userSelector = useAppSelector((state) => state.userReducer);
     const dispatch = useAppDispatch();
     const matches = useMediaQuery('(min-width: 850px)');
     const [stateCurrentPage, setStateCurrentPage] = useState({
@@ -62,6 +68,13 @@ const NavbarMenu = () => {
     });
     const [state, setState] = useState<boolean>(false);
     const [elements, setElements] = useState<Array<JSX.Element> | null>(null);
+
+    useEffect(() => {
+        if(authSelector.isAuthenticated){
+            // @ts-ignore
+            dispatch(userAction.getUserRoles());
+        }
+    }, [authSelector.isAuthenticated]);
 
     const toggleDrawer = (open: boolean) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -72,7 +85,7 @@ const NavbarMenu = () => {
     };
 
     // Выбор элемента меню для визуализации
-    const currentPageSwitcher = (state) => {
+    const currentPageSwitcher = (state: { value: string; }) => {
         switch (state.value) {
             case UserPanelValue.sign_in: {
                 return (<SignInPage setStateCurrentPage={setStateCurrentPage} />);
@@ -90,10 +103,23 @@ const NavbarMenu = () => {
     }
 
     const executeDrawerOption = () => {
+        const list: Array<JSX.Element | undefined> = [];
+
+        const values = new Map<string, JSX.Element>([
+            [UserRoleValue.admin, <AdminOption setState={setState} />],
+            [UserRoleValue.builder_admin, <BuilderAdminOption setState={setState} />],
+            [UserRoleValue.builder_manager, <BuilderManagerOption setState={setState} />],
+            [UserRoleValue.manager, <ManagerOption setState={setState} />],
+        ]);
+
+        userSelector.roles.forEach((element: string) => {
+            list.push(values.get(element));
+        });
+
         return (
             <>
-                <BuilderAdminOption setState={setState} />
-                <BuilderManagerOption setState={setState} />
+                { list.map((value) => value) }
+                <ClientOption setState={setState} />
             </>
         )
     }
